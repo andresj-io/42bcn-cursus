@@ -6,7 +6,18 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:33:43 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/02 10:33:44 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/02 21:58:54 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char *a;
+
+	a = b;
+	while (len--)
+		*a++ = (unsigned char)c;
+	return (b);
+}

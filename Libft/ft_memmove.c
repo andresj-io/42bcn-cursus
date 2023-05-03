@@ -6,7 +6,13 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:33:39 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/02 10:33:39 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/02 22:29:26 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
+void *ft_memmove(void *dst, const void *src, size_t len)
+{
+	
+}

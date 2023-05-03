@@ -6,7 +6,16 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:33:46 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/02 10:33:47 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/02 21:32:30 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int	ft_strlen(const char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i++]);
+	return (i);
+}
 

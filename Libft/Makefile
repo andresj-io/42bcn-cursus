@@ -6,7 +6,26 @@
 #    By: andresj <andresj@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/05/02 10:33:55 by andresj          ###   ########.fr        #
+#    Updated: 2023/05/02 13:35:15 by andresj          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME=libft.a
+CC=cc
+CFLAGS=-g -Wall -Wextra -Werror
+
+%.o: %.c %.h
+	$(CC) $(CFLAGS) -c $^
+
+test: *.o test.c
+	$(CC) $(CFLAGS) -o test test.c *.o
+
+all:
+	$(CC) $(CFLAGS) -o $(NAME)
+
+clean:
+	rm *.o $@ $^
+
+fclean:
+
+re:
