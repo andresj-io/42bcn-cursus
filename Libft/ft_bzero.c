@@ -6,13 +6,15 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:33:26 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/02 21:58:58 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/04 10:21:08 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 void	ft_bzero(void *s, int n)
 {
-	unsigned char *a;
+	unsigned char	*a;
 
 	a = s;
 	while (n--)

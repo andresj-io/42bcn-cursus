@@ -6,7 +6,13 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:37:38 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/02 10:37:39 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/04 08:59:41 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+{
+	
+}

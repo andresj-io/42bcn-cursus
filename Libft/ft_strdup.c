@@ -6,7 +6,13 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:37:33 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/02 10:37:33 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/04 08:38:57 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+char	*ft_strdup(const char *s1)
+{
+	
+}

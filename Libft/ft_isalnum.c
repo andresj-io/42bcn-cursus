@@ -6,9 +6,11 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:30:01 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/02 16:31:56 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/04 08:20:03 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	static is_digit(int c);
 int	static is_upper(int c);

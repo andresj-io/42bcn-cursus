@@ -6,9 +6,11 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:29:54 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/02 16:34:33 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/04 08:20:13 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isprint(int c)
 {

@@ -6,24 +6,16 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 13:22:36 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/02 21:41:59 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/04 08:09:06 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
 #include <strings.h>
 #include <ctype.h>
-
-#include "ft_atoi.c"
-#include "ft_bzero.c"
-#include "ft_isalpha.c"
-#include "ft_isalnum.c"
-#include "ft_isascii.c"
-#include "ft_isdigit.c"
-#include "ft_isprint.c"
-#include "ft_strlen.c"
 
 void	test_atoi(void);
 void	test_bzero(void);

@@ -6,7 +6,13 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:35:17 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/02 10:35:17 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/04 08:50:17 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	
+}

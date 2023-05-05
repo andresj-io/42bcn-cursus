@@ -6,9 +6,11 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:37:08 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/02 16:28:43 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/04 08:19:45 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	static is_upper(int c);
 int	static is_lower(int c);

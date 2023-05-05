@@ -6,18 +6,20 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:37:11 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/02 15:07:42 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/04 10:20:55 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <libft.h>
 
 int		static is_space(char c);
 int		static is_number(char c);
 
 int	ft_atoi(const char *str)
 {
-	int i;
-	int sign;
-	int number;
+	int	i;
+	int	sign;
+	int	number;
 
 	i = 0;
 	sign = 1;
