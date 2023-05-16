@@ -6,14 +6,14 @@
 #    By: andresj <andresj@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/05/16 07:40:55 by andresj          ###   ########.fr        #
+#    Updated: 2023/05/16 08:09:37 by andresj          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # The name of the executable
 EXE = test
 # The name of the archived library
-ARCHIVE = libft.a
+NAME = libft.a
 # Frontend program when linking
 CC = cc
 # Flags for compilation
@@ -60,28 +60,30 @@ SOURCES = ft_atoi.c \
 # This creates a list of object files from the source files
 OBJECTS = $(SOURCES:%.c=%.o)
 
-%.o: %.c $(LIBS)
-	$(CC) $(CFLAGS) -c $@ $^ $(LIBS)
+#.PHONY: all clean fclean re
 
+$(NAME): $(OBJECTS) $(LIBS)
+	ar rcs $@ $<
 # The first target, this will be the default target if none is specified
-# This target tells "make" to make the "all" target
 default: all
-all: $(EXE)
-# This will link the executable from the object files
-$(EXE): $(OBJECTS) test.c
-    $(CC) $(CFLAGS) $(OBJECTS) -o $(EXE) $(LIBS)
-all:
-	$(CC) $(CFLAGS) -o $(NAME)
-
-# Target to clean up after us
+# This target tells "make" to make the "all" target
+all: $(NAME)
+# Target to clean up after use
 clean:
-    -rm -f $(EXE)      # Remove the executable file
-    -rm -f $(OBJECTS)  # Remove the object files
-# clean:
-# 	rm *.o $@ $^
+	rm -f $(OBJECTS)  # Remove the object files
+	rm -f $(EXE)      # Remove the executable file
 
 fclean:
+	rm -f $(NAME)
 
-re:
+re: fclean all
+
+%.o: %.c $(LIBS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# This will link the executable from the object files
+$(EXE): $(OBJECTS) $(LIBS) test.c
+	$(CC) $(CFLAGS) $(OBJECTS)  -o $(EXE) 
+
 
 bonus:
