@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 10:34:49 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/14 12:40:19 by andresj          ###   ########.fr       */
+/*   Created: 2023/05/14 12:46:24 by andresj           #+#    #+#             */
+/*   Updated: 2023/05/14 12:51:05 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_tolower(int c)
+void	ft_putendl_fd(char *s, int fd)
 {
-	if (is_upper(c))
-		c += ' ';
-	return (c);
+	ft_putstr_fd(s, fd);
+	write(fd, "\n", 1);
 }

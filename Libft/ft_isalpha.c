@@ -6,32 +6,15 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:37:08 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/04 08:19:45 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/14 12:41:12 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	static is_upper(int c);
-int	static is_lower(int c);
-
 int	ft_isalpha(int c)
 {
-	if (is_upper(c) || is_lower(c))
-		return (1);
-	return (0);
-}
-
-int	static is_upper(int c)
-{
-	if (c >= 'A' && c <= 'Z')
-		return (1);
-	return (0);
-}
-
-int	static is_lower(int c)
-{
-	if (c >= 'a' && c <= 'z')
+	if (ft_is_upper(c) || ft_is_lower(c))
 		return (1);
 	return (0);
 }

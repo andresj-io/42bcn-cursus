@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 10:34:49 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/14 12:40:19 by andresj          ###   ########.fr       */
+/*   Created: 2023/05/13 19:41:33 by andresj           #+#    #+#             */
+/*   Updated: 2023/05/13 20:06:19 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_tolower(int c)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	if (is_upper(c))
-		c += ' ';
-	return (c);
+	int		i;
+	char	*conv;
+
+	conv = (char *) malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!conv)
+		return (NULL);
+	ft_strlcpy(conv, s, ft_strlen(s));
+	i = 0;
+	while (s[i])
+		conv[i++] = (f(0, s[i]));
+	return (conv);
 }

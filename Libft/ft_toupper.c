@@ -6,24 +6,15 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:33:30 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/04 09:01:23 by andresj          ###   ########.fr       */
+/*   Updated: 2023/05/14 12:39:52 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	static is_lower(int c);
-
 int	ft_toupper(int c)
 {
-	if (is_lower(c))
+	if (ft_is_lower(c))
 		c -= ' ';
 	return (c);
-}
-
-int	static is_lower(int c)
-{
-	if (c >= 'a' && c <= 'z')
-		return (1);
-	return (0);
 }
