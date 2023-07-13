@@ -6,13 +6,14 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 07:59:36 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/15 09:08:55 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/11 07:05:27 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __LIBFT_H__
 # define __LIBFT_H__
 
+# include <unistd.h>
 # include <stdlib.h>
 # include <stdbool.h>
 

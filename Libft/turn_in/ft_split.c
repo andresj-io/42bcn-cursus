@@ -6,7 +6,7 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:09:01 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/12 18:44:14 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/11 07:06:53 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,10 @@ t_status	static split(const char *str, char c, int wq, char **splitted)
 	int		i;
 	int		word_ix;
 	int		wlen;
-	bool	is_word;
 
 	i = 0;
 	wlen = 0;
 	word_ix = 0;
-	is_word = false;
 	while (str[i])
 	{
 		if (str[i] != c)
@@ -89,7 +87,6 @@ t_status	static split(const char *str, char c, int wq, char **splitted)
 t_status	static add_word(char const *str, int len, char **sp, int w_ix)
 {
 	int		i;
-	char	*word;
 	
 	sp[w_ix] = (char*)malloc(sizeof(char) * (len +1));
 	if (!sp[w_ix])

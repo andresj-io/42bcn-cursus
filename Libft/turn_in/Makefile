@@ -6,7 +6,7 @@
 #    By: andresj <andresj@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/05/16 08:09:37 by andresj          ###   ########.fr        #
+#    Updated: 2023/07/11 05:47:55 by andresj          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,6 @@ SOURCES = ft_atoi.c \
 					ft_substr.c \
 					ft_tolower.c \
 					ft_toupper.c \
-					test.c
 # This creates a list of object files from the source files
 OBJECTS = $(SOURCES:%.c=%.o)
 

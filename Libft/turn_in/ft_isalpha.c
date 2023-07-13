@@ -6,7 +6,7 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:37:08 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/14 12:41:12 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/11 07:00:13 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_isalpha(int c)
 {
-	if (ft_is_upper(c) || ft_is_lower(c))
+	if (is_upper(c) || is_lower(c))
 		return (1);
 	return (0);
 }
