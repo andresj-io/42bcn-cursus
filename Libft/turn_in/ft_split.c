@@ -3,103 +3,105 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:09:01 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/11 07:06:53 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/14 14:09:49 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 char			**ft_split(char const *s, char c);
-int				static count_words(char const *s, char c);
-t_status	static split(char const *str, char c, int wq, char **splitted);
-t_status	static add_word(char const *str, int len, char **sp, int w_ix);
+static int		count_words(char const *s, char c);
+static t_status	split(char const *str, char c, char **splitted);
+static t_status	add_word(char const *str, int len, char **words, int index);
 
 char	**ft_split(char const *s, char c)
 {
-	int		word_q;
+	int		word_count;
 	char	**splitted;
 
 	if (!s)
 		return (NULL);
-	word_q = count_words(s, c);
-	if (word_q == 0)
-		return (NULL);
-	splitted = (char **) malloc(sizeof(char *) * (word_q + 1));
+	word_count = count_words(s, c);
+	splitted = (char **) malloc(sizeof(char *) * (word_count + 1));
 	if (!splitted)
 		return (NULL);
-	if (split(s, c, word_q, splitted) == error)
+	if (split(s, c, splitted) == error1)
 		return (NULL);
-	splitted[word_q] = NULL;
+	splitted[word_count] = NULL;
 	return (splitted);
 }
 
-int		static count_words(const char *s, char c)
+static int	count_words(const char *s, char c)
 {
 	bool	is_word;
 	int		count;
+	int		i;
 
 	is_word = false;
 	count = 0;
-	while (*s)
+	i = 0;
+	while (s[i])
 	{
-		if (*s == c)
+		if (s[i] == c)
 			is_word = false;
 		else if (!is_word)
 		{
 			is_word = true;
 			count++;
 		}
-		s++;
+		i++;
 	}
-	return (++count);
+	return (count);
 }
 
-t_status	static split(const char *str, char c, int wq, char **splitted)
+static t_status	split(const char *str, char c, char **splitted)
 {
-	int		i;
-	int		word_ix;
-	int		wlen;
+	int	i;
+	int	count;
+	int	w_len;
+	int	s_len;
 
 	i = 0;
-	wlen = 0;
-	word_ix = 0;
-	while (str[i])
+	count = 0;
+	s_len = ft_strlen(str);
+	while (i < s_len)
 	{
-		if (str[i] != c)
+		if (*(str + i) != c)
 		{
-			while (str[i] != c || str[i] != '\0')
+			w_len = 0;
+			while (*(str + i) != c && *(str + i) != '\0')
 			{
-				wlen++;
+				w_len++;
 				i++;
 			}
-			if (add_word(str - wlen, wlen, splitted, word_ix) == error)
-				return (error);
-			word_ix++;
+			if (add_word(str + i - w_len, w_len, splitted, count) == error1)
+				return (error1);
+			count++;
 		}
 		i++;
 	}
 	return (ok);
 }
 
-t_status	static add_word(char const *str, int len, char **sp, int w_ix)
+static t_status	add_word(char const *str, int len, char **words, int index)
 {
 	int		i;
-	
-	sp[w_ix] = (char*)malloc(sizeof(char) * (len +1));
-	if (!sp[w_ix])
+
+	words[index] = (char *)malloc(sizeof(char) * (len + 1));
+	if (!words[index])
 	{
 		i = 0;
-		while (i < w_ix)
+		while (i < index)
 		{
-			free(sp[i]);
+			free(words[i]);
 			i++;
 		}
-		free(sp);
-		return (error);
+		free(words);
+		return (error1);
 	}
-	ft_strlcpy(sp[w_ix], str, len + 1);
+	ft_strlcpy(words[index], str, len + 1);
 	return (ok);
 }

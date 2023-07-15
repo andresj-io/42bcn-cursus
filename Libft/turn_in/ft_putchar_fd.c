@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:35:39 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/11 07:05:32 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/13 11:41:04 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libft.h"
+#include "libft.h"
 
 void	ft_putchar_fd(char c, int fd)
 {

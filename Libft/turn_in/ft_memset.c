@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:33:43 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/04 08:33:56 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/13 11:41:01 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	unsigned char *a;
+	unsigned char	*a;
 
 	a = b;
 	while (len--)

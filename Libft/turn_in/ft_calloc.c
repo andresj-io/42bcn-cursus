@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:37:16 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/04 10:32:41 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/13 11:40:00 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void		*p1;
+	void	*p1;
 	size_t	total_size;
 
 	total_size = count * size;

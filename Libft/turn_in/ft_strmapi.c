@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 19:41:33 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/13 20:06:19 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/14 10:48:57 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	int		i;
 	char	*conv;
 
-	conv = (char *) malloc(sizeof(char) * (ft_strlen(s) + 1));
+	conv = ft_strdup(s);
 	if (!conv)
 		return (NULL);
-	ft_strlcpy(conv, s, ft_strlen(s));
 	i = 0;
 	while (s[i])
-		conv[i++] = (f(0, s[i]));
+	{
+		conv[i] = (f(i, s[i]));
+		i++;
+	}
 	return (conv);
 }

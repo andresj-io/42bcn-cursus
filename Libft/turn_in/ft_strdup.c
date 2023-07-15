@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:37:33 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/04 08:38:57 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/13 17:57:00 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,14 @@
 
 char	*ft_strdup(const char *s1)
 {
-	
+	int		len;
+	char	*copy;
+
+	len = ft_strlen(s1) + 1;
+	copy = (char *) malloc(sizeof(char) * len);
+	if (!copy)
+		return (NULL);
+	ft_strlcpy(copy, s1, len);
+	return (copy);
 }
+// ft_memcpy(copy, s1, len);

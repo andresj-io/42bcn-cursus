@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:33:39 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/04 08:24:56 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/15 15:07:13 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char *d;
-	const char *s;
+	char		*d;
+	const char	*s;
 
+	if (!dst && !src)
+		return (NULL);
 	d = dst;
 	s = src;
 	if (d < s)
@@ -30,6 +32,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		s += len;
 		while (len--)
 			*--d = *--s;
-	}	
+	}
 	return (dst);
 }

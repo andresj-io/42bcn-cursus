@@ -3,86 +3,98 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: andresj <andresj@student.42.fr>            +#+  +:+       +#+         #
+#    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/07/11 05:47:55 by andresj          ###   ########.fr        #
+#    Updated: 2023/07/15 17:10:18 by ajacome-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# The name of the executable
-EXE = test
 # The name of the archived library
 NAME = libft.a
+
+# Libraries to link with
+HEAD = libft.h
+
 # Frontend program when linking
-CC = cc
+CC = gcc
+
 # Flags for compilation
 CFLAGS = -g -Wall -Wextra -Werror
-# Libraries to link with
-LIBS = libft.h
+
+LFLAGS = -I $(HEAD)
+
 # The name of the source files
-SOURCES = ft_atoi.c \
-					ft_bzero.c \
-					ft_calloc.c \
-					ft_isalnum.c \
-					ft_isalpha.c \
-					ft_isascii.c \
-					ft_iscases.c \
-					ft_isdigit.c \
-					ft_isprint.c \
-					ft_itoa.c \
-					ft_memchr.c \
-					ft_memcmp.c \
-					ft_memcpy.c \
-					ft_memmove.c \
-					ft_memset.c \
-					ft_putchar_fd.c \
-					ft_putendl_fd.c \
-					ft_putnbr_fd.c  \
-					ft_putstr_fd.c  \
-					ft_split.c \
-					ft_strchr.c \
-					ft_strdup.c \
-					ft_striteri.c \
-					ft_strjoin.c \
-					ft_strlcat.c \
-					ft_strlcpy.c \
-					ft_strlen.c \
-					ft_strmapi.c \
-					ft_strncmp.c \
-					ft_strnstr.c \
-					ft_strrchr.c \
-					ft_strtrim.c \
-					ft_substr.c \
-					ft_tolower.c \
-					ft_toupper.c \
+SOURCES = ft_iscases.c \
+ft_atoi.c \
+ft_bzero.c \
+ft_calloc.c \
+ft_isalnum.c \
+ft_isalpha.c \
+ft_isascii.c \
+ft_isdigit.c \
+ft_isprint.c \
+ft_itoa.c \
+ft_memchr.c \
+ft_memcmp.c \
+ft_memcpy.c \
+ft_memmove.c \
+ft_memset.c \
+ft_putchar_fd.c \
+ft_putendl_fd.c \
+ft_putnbr_fd.c  \
+ft_putstr_fd.c  \
+ft_split.c \
+ft_strchr.c \
+ft_strdup.c \
+ft_striteri.c \
+ft_strjoin.c \
+ft_strlcat.c \
+ft_strlcpy.c \
+ft_strlen.c \
+ft_strmapi.c \
+ft_strncmp.c \
+ft_strnstr.c \
+ft_strrchr.c \
+ft_strtrim.c \
+ft_substr.c \
+ft_tolower.c \
+ft_toupper.c \
+
+BONUSSOURCES = ft_lstnew.c \
+ft_lstadd_front.c \
+ft_lstsize.c \
+ft_lstlast.c \
+ft_lstadd_back.c \
+ft_lstdelone \
+ft_lstclear \
+ft_lstiter.c \
+ft_lstmap.c \
+
 # This creates a list of object files from the source files
 OBJECTS = $(SOURCES:%.c=%.o)
+BONUSOBJECTS = $(BONUSSOURCES:%.c=%.o)
 
-#.PHONY: all clean fclean re
+$(NAME): $(OBJECTS)
+	ar rcs $@ $^
 
-$(NAME): $(OBJECTS) $(LIBS)
-	ar rcs $@ $<
-# The first target, this will be the default target if none is specified
 default: all
-# This target tells "make" to make the "all" target
-all: $(NAME)
-# Target to clean up after use
-clean:
-	rm -f $(OBJECTS)  # Remove the object files
-	rm -f $(EXE)      # Remove the executable file
 
-fclean:
+all: $(NAME)
+
+# Remove the object files
+clean:
+	rm -f $(OBJECTS) $(BONUSOBJECTS)
+
+fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-%.o: %.c $(LIBS)
-	$(CC) $(CFLAGS) -c $< -o $@
+bonus: $(OBJECTS) $(BONUSOBJECTS)
+	ar rcs $@ $^
 
-# This will link the executable from the object files
-$(EXE): $(OBJECTS) $(LIBS) test.c
-	$(CC) $(CFLAGS) $(OBJECTS)  -o $(EXE) 
+%.o: %.c
+	$(CC) $(CFLAGS) $(LFLAGS) -c $< -o $@061
 
-
-bonus:
+.PHONY: all clean fclean re

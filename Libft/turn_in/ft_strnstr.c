@@ -3,40 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:37:38 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/17 13:40:50 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/13 17:49:22 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+t_status	find_needle(char const *haystack, char const *needle);
+
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	char	*found;
-	int		i;
+	size_t	i;
+	size_t	nlen;
 
-	found = NULL;
 	i = 0;
-	while (haystack[i] || len--)
+	nlen = ft_strlen(needle);
+	if (!(*(needle)) || len < 0)
+		return ((char *) haystack);
+	while (haystack[i] && i <= len)
 	{
-		find_needle(haystack + i, needle);
+		if (haystack[i] == *needle && (nlen <= len - i) 
+			&& find_needle(haystack + i, needle))
+			return ((char *)haystack + i);
+		i++;
 	}
-	return (found);
+	return (NULL);
 }
 
-find_needle(char *haystack, char *needle)
+t_status	find_needle(char const *haystack, char const *needle)
 {
 	int	i;
 
 	i = 0;
-	while (*(needle + i) || *(haystack + i))
+	while (*(needle + i))
 	{
 		if (*(haystack + i) != *(needle + i))
-		{
-			
-		}
-		
+			return (error1);
+		i++;
 	}
+	return (ok);
 }

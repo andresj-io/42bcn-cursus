@@ -3,50 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:49:27 by andresj           #+#    #+#             */
-/*   Updated: 2023/05/14 13:02:26 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/15 12:08:55 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa(int n);
-int		static get_figq(int n);
+char		*ft_itoa(int n);
+int static	get_figq(int n);
+char static	*init_number(size_t len, int n);
 
 char	*ft_itoa(int n)
 {
-	int		i;
-	int		len;
-	char	*number;
+	int				len;
+	unsigned int	num;
+	char			*number;
 
 	len = get_figq(n);
-	number = (char *) malloc(sizeof(char) * (len + 1));
+	number = init_number(len, n);
 	if (!number)
 		return (NULL);
-	i = 0;
-	while (n / 10)
+	num = 0;
+	if (n < 0)
+		num = n * -1;
+	else
+		num = n;
+	while (num > 0)
 	{
-		number[i++] = n % 10;
-		n /= 10;
+		number[--len] = (num % 10) + '0';
+		num /= 10;
 	}
-	number[i++] = n % 10;
-	number[i] = '\0';
 	return (number);
 }
 
-int	static get_figq(int n)
+char static	*init_number(size_t len, int n)
+{
+	char	*number;
+
+	number = (char *) malloc(sizeof(char) * (len + 1));
+	if (!number)
+		return (NULL);
+	number[len] = '\0';
+	if (n < 0)
+		number[0] = '-';
+	else if (n == 0)
+		number[0] = '0';
+	return (number);
+}
+
+int static	get_figq(int n)
 {
 	int	len;
 
 	len = 0;
-	if (n < 0)
-		len++;
-	while (n / 10)
+	if (n <= 0)
+		len = 1;
+	while (n != 0)
 	{
 		n /= 10;
 		len++;
 	}
-	return (len++);
+	return (len);
 }
