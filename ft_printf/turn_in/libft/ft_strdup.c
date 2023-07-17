@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/15 14:12:01 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/17 13:44:28 by ajacome-         ###   ########.fr       */
+/*   Created: 2023/05/02 10:37:33 by andresj           #+#    #+#             */
+/*   Updated: 2023/07/13 17:57:00 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+char	*ft_strdup(const char *s1)
 {
-	t_list	*new;
-	t_list	*node;
-	void	*content;
+	int		len;
+	char	*copy;
 
-	if (!lst || !f || !del)
+	len = ft_strlen(s1) + 1;
+	copy = (char *) malloc(sizeof(char) * len);
+	if (!copy)
 		return (NULL);
-	new = NULL;
-	while (lst)
-	{
-		content = f(lst->content);
-		node = ft_lstnew(content);
-		if (!node)
-		{
-			ft_lstclear(&new, del);
-			del(content);
-			return (NULL);
-		}
-		ft_lstadd_back(&new, node);
-		lst = lst->next;
-	}
-	return (new);
+	ft_strlcpy(copy, s1, len);
+	return (copy);
 }
+// ft_memcpy(copy, s1, len);

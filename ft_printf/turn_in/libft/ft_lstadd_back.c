@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/15 14:12:01 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/17 13:44:28 by ajacome-         ###   ########.fr       */
+/*   Created: 2023/07/15 13:14:35 by ajacome-          #+#    #+#             */
+/*   Updated: 2023/07/15 18:09:28 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*new;
-	t_list	*node;
-	void	*content;
+	t_list	*last;
 
-	if (!lst || !f || !del)
-		return (NULL);
-	new = NULL;
-	while (lst)
+	if (!*lst)
 	{
-		content = f(lst->content);
-		node = ft_lstnew(content);
-		if (!node)
-		{
-			ft_lstclear(&new, del);
-			del(content);
-			return (NULL);
-		}
-		ft_lstadd_back(&new, node);
-		lst = lst->next;
+		*lst = new;
+		return ;
 	}
-	return (new);
+	last = ft_lstlast((*lst));
+	last->next = new;
 }

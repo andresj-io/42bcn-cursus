@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/15 14:12:01 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/17 13:44:28 by ajacome-         ###   ########.fr       */
+/*   Created: 2023/05/02 10:37:24 by andresj           #+#    #+#             */
+/*   Updated: 2023/07/13 11:40:46 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	t_list	*new;
-	t_list	*node;
-	void	*content;
+	const unsigned char	*p;
+	size_t				i;
 
-	if (!lst || !f || !del)
-		return (NULL);
-	new = NULL;
-	while (lst)
+	p = s;
+	i = 0;
+	while (i < n)
 	{
-		content = f(lst->content);
-		node = ft_lstnew(content);
-		if (!node)
-		{
-			ft_lstclear(&new, del);
-			del(content);
-			return (NULL);
-		}
-		ft_lstadd_back(&new, node);
-		lst = lst->next;
+		if (*p == (unsigned char) c)
+			return ((void *) p);
+		i++;
+		p++;
 	}
-	return (new);
+	return (NULL);
 }

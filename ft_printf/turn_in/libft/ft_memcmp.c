@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/15 14:12:01 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/17 13:44:28 by ajacome-         ###   ########.fr       */
+/*   Created: 2023/05/02 10:37:27 by andresj           #+#    #+#             */
+/*   Updated: 2023/07/13 11:40:50 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	t_list	*new;
-	t_list	*node;
-	void	*content;
+	size_t				i;
+	const unsigned char	*p1;
+	const unsigned char	*p2;
 
-	if (!lst || !f || !del)
-		return (NULL);
-	new = NULL;
-	while (lst)
+	i = 0;
+	p1 = s1;
+	p2 = s2;
+	while (i < n)
 	{
-		content = f(lst->content);
-		node = ft_lstnew(content);
-		if (!node)
-		{
-			ft_lstclear(&new, del);
-			del(content);
-			return (NULL);
-		}
-		ft_lstadd_back(&new, node);
-		lst = lst->next;
+		if (*p1 != *p2)
+			return (*p1 - *p2);
+		i++;
+		p1++;
+		p2++;
 	}
-	return (new);
+	return (0);
 }

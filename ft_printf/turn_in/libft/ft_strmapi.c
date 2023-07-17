@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/15 14:12:01 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/17 13:44:28 by ajacome-         ###   ########.fr       */
+/*   Created: 2023/05/13 19:41:33 by andresj           #+#    #+#             */
+/*   Updated: 2023/07/14 10:48:57 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
-{
-	t_list	*new;
-	t_list	*node;
-	void	*content;
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
-	if (!lst || !f || !del)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	int		i;
+	char	*conv;
+
+	conv = ft_strdup(s);
+	if (!conv)
 		return (NULL);
-	new = NULL;
-	while (lst)
+	i = 0;
+	while (s[i])
 	{
-		content = f(lst->content);
-		node = ft_lstnew(content);
-		if (!node)
-		{
-			ft_lstclear(&new, del);
-			del(content);
-			return (NULL);
-		}
-		ft_lstadd_back(&new, node);
-		lst = lst->next;
+		conv[i] = (f(i, s[i]));
+		i++;
 	}
-	return (new);
+	return (conv);
 }

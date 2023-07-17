@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/15 14:12:01 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/17 13:44:28 by ajacome-         ###   ########.fr       */
+/*   Created: 2023/05/09 22:36:39 by andresj           #+#    #+#             */
+/*   Updated: 2023/07/13 18:12:42 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	t_list	*new;
-	t_list	*node;
-	void	*content;
+	int		s1_len;
+	int		s2_len;
+	char	*concat;
 
-	if (!lst || !f || !del)
+	if (!s1 || !s2)
 		return (NULL);
-	new = NULL;
-	while (lst)
-	{
-		content = f(lst->content);
-		node = ft_lstnew(content);
-		if (!node)
-		{
-			ft_lstclear(&new, del);
-			del(content);
-			return (NULL);
-		}
-		ft_lstadd_back(&new, node);
-		lst = lst->next;
-	}
-	return (new);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	concat = (char *) malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!concat)
+		return (NULL);
+	ft_strlcpy(concat, s1, s1_len + 1);
+	ft_strlcpy(concat + s1_len, s2, s2_len + 1);
+	return (concat);
 }

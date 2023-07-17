@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/15 14:12:01 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/17 13:44:28 by ajacome-         ###   ########.fr       */
+/*   Created: 2023/05/02 10:34:47 by andresj           #+#    #+#             */
+/*   Updated: 2023/07/13 16:30:41 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
-{
-	t_list	*new;
-	t_list	*node;
-	void	*content;
+t_status static	is_match(const char *s, int c);
 
-	if (!lst || !f || !del)
-		return (NULL);
-	new = NULL;
-	while (lst)
+char	*ft_strchr(const char *s, int c)
+{
+	int		i;
+
+	i = 0;
+	while (s[i])
 	{
-		content = f(lst->content);
-		node = ft_lstnew(content);
-		if (!node)
-		{
-			ft_lstclear(&new, del);
-			del(content);
-			return (NULL);
-		}
-		ft_lstadd_back(&new, node);
-		lst = lst->next;
+		if (is_match(s + i, c) == ok)
+			return ((char *) s + i);
+		i++;
 	}
-	return (new);
+	if (is_match(s + i, c) == ok)
+		return ((char *) s + i);
+	return (NULL);
+}
+
+t_status static	is_match(const char *s, int c)
+{
+	if (*s == (char) c)
+		return (ok);
+	else
+		return (error1);
 }
