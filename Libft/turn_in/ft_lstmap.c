@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 14:12:01 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/15 15:05:32 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:08:52 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,24 @@
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new;
-	t_list	*aux;
+	t_list	*node;
+	void	*content;
 
 	if (!lst)
 		return (NULL);
-	aux = lst;
-	new = ft_lstnew(f(aux->content));
-	if (!new)
-		return (NULL);
-	ft_lstdelone(lst, del);
-	new->next = ft_lstmap(aux->next, f, del);
+	new = NULL;
+	while (lst)
+	{
+		content = f(lst->content);
+		node = ft_lstnew(content);
+		if (!node)
+		{
+			ft_lstclear(&new, del);
+			del(content);
+			return (NULL);
+		}
+		ft_lstadd_back(&new, node);
+		lst = lst->next;
+	}
+	return (new);
 }

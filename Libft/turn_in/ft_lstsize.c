@@ -6,23 +6,23 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 13:02:40 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/15 13:47:19 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/15 18:16:09 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
 	int		len;
-	t_list	*aux;
 
-	aux = lst;
-	len = 0;
-	while (aux->next)
+	if (!lst)
+		return (0);
+	len = 1;
+	while (lst->next)
 	{
 		len++;
-		aux = aux->next;
+		lst = lst->next;
 	}
 	return (len);
 }

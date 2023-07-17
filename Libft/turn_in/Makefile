@@ -6,7 +6,7 @@
 #    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/07/15 17:36:38 by ajacome-         ###   ########.fr        #
+#    Updated: 2023/07/15 18:06:30 by ajacome-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,7 @@ HEAD = libft.h
 CC = gcc
 
 # Flags for compilation
-CFLAGS = -g -Wall -Wextra -Werror
-
-LFLAGS = -I $(HEAD)
+CFLAGS = -g -Wall -Wextra -Werror -I.
 
 # The name of the source files
 SOURCES = ft_iscases.c \
@@ -61,19 +59,19 @@ ft_substr.c \
 ft_tolower.c \
 ft_toupper.c \
 
-BONUSSOURCES = ft_lstnew.c \
+BONUSSRC = ft_lstnew.c \
 ft_lstadd_front.c \
 ft_lstsize.c \
 ft_lstlast.c \
 ft_lstadd_back.c \
-ft_lstdelone \
-ft_lstclear \
+ft_lstdelone.c \
+ft_lstclear.c \
 ft_lstiter.c \
 ft_lstmap.c \
 
 # This creates a list of object files from the source files
 OBJECTS = $(SOURCES:%.c=%.o)
-BONUSOBJECTS = $(BONUSSOURCES:%.c=%.o)
+BONUSOBJECTS = $(BONUSSRC:%.c=%.o)
 
 $(NAME): $(OBJECTS)
 	ar rcs $@ $^
@@ -93,11 +91,11 @@ re: fclean all
 
 bonus: .bonus
 
-.bonus: $(OBJECTS) $(BONUSOBJECTS)
+.bonus: $(BONUSOBJECTS) $(OBJECTS)
+	ar rcs $(NAME) $(BONUSOBJECTS) $(OBJECTS)
 	touch .bonus
-	ar rcs $@ $^
 
-%.o: %.c
-	$(CC) $(CFLAGS) $(LFLAGS) -c $< -o $@061
+%.o: %.c $(HEAD) Makefile
+	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: all clean fclean re
