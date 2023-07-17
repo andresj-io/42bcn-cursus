@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:43:49 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/13 11:41:14 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:57:38 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	ft_putstr_fd(char *s, int fd)
 	i = 0;
 	while (s[i])
 	{
-		ft_putchar_fd(s[i], fd);
+		if (ft_putchar_fd(s[i], fd) < 0)
+			return (-1);
 		i++;
 	}
 }

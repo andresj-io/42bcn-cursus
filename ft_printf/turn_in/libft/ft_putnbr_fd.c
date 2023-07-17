@@ -6,14 +6,14 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:51:50 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/15 16:41:35 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/17 16:00:01 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static bool	special_cases(int n, int fd);
-static void	recursive_put(int n, int fd);
+static int	recursive_put(int n, int fd);
 
 void	ft_putnbr_fd(int n, int fd)
 {
@@ -43,13 +43,15 @@ static bool	special_cases(int n, int fd)
 		return (false);
 }
 
-static void	recursive_put(int n, int fd)
+static int	recursive_put(int n, int fd)
 {
 	char	numc;
 
 	if (n / 10)
-		recursive_put(n / 10, fd);
+	{
+		if (recursive_put(n / 10, fd) < 0)
+			return (-1);
+	}
 	numc = '0' + (n % 10);
-	write(fd, &numc, 1);
-	return ;
+	return (write(fd, &numc, 1));
 }
