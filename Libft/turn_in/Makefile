@@ -6,7 +6,7 @@
 #    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/07/15 17:10:18 by ajacome-         ###   ########.fr        #
+#    Updated: 2023/07/15 17:36:38 by ajacome-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,10 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(OBJECTS) $(BONUSOBJECTS)
+bonus: .bonus
+
+.bonus: $(OBJECTS) $(BONUSOBJECTS)
+	touch .bonus
 	ar rcs $@ $^
 
 %.o: %.c
