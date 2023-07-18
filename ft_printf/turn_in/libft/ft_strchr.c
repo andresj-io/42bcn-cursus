@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:34:47 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/13 16:30:41 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:21:36 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ t_status static	is_match(const char *s, int c)
 	if (*s == (char) c)
 		return (ok);
 	else
-		return (error1);
+		return (err);
 }

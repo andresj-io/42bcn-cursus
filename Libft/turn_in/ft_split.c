@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:09:01 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/14 14:09:49 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:21:36 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**ft_split(char const *s, char c)
 	splitted = (char **) malloc(sizeof(char *) * (word_count + 1));
 	if (!splitted)
 		return (NULL);
-	if (split(s, c, splitted) == error1)
+	if (split(s, c, splitted) == err)
 		return (NULL);
 	splitted[word_count] = NULL;
 	return (splitted);
@@ -77,8 +77,8 @@ static t_status	split(const char *str, char c, char **splitted)
 				w_len++;
 				i++;
 			}
-			if (add_word(str + i - w_len, w_len, splitted, count) == error1)
-				return (error1);
+			if (add_word(str + i - w_len, w_len, splitted, count) == err)
+				return (err);
 			count++;
 		}
 		i++;
@@ -100,7 +100,7 @@ static t_status	add_word(char const *str, int len, char **words, int index)
 			i++;
 		}
 		free(words);
-		return (error1);
+		return (err);
 	}
 	ft_strlcpy(words[index], str, len + 1);
 	return (ok);

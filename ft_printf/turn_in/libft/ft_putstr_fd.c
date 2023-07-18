@@ -6,21 +6,16 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:43:49 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/17 15:57:38 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:12:20 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+ssize_t	ft_putstr_fd(char *s, int fd)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	while (s[i])
-	{
-		if (ft_putchar_fd(s[i], fd) < 0)
-			return (-1);
-		i++;
-	}
+	len = ft_strlen(s);
+	return (write(fd, s, len));
 }

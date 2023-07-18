@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:37:38 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/13 17:49:22 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:21:36 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_status	find_needle(char const *haystack, char const *needle)
 	while (*(needle + i))
 	{
 		if (*(haystack + i) != *(needle + i))
-			return (error1);
+			return (err);
 		i++;
 	}
 	return (ok);

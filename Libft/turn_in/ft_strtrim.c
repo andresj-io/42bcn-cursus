@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 22:50:11 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/13 19:06:52 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:21:36 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ t_status static	seek(char c, const char *set)
 			return (ok);
 		i++;
 	}
-	return (error1);
+	return (err);
 }

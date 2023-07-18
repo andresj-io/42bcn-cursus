@@ -1,39 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_printf_conv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 10:34:47 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/18 10:21:36 by ajacome-         ###   ########.fr       */
+/*   Created: 2023/07/18 12:02:18 by ajacome-          #+#    #+#             */
+/*   Updated: 2023/07/18 12:02:18 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-t_status static	is_match(const char *s, int c);
-
-char	*ft_strchr(const char *s, int c)
-{
-	int		i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (is_match(s + i, c) == ok)
-			return ((char *) s + i);
-		i++;
-	}
-	if (is_match(s + i, c) == ok)
-		return ((char *) s + i);
-	return (NULL);
-}
-
-t_status static	is_match(const char *s, int c)
-{
-	if (*s == (char) c)
-		return (ok);
-	else
-		return (err);
-}
