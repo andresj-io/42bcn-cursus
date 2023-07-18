@@ -6,18 +6,15 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:29:57 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/18 12:25:48 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:08:53 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_printf(const char *, ...);
 static t_status	write_normal(const char *str, int *pos, ssize_t *count);
-static t_status	write_percent(const char *str, int *pos, ssize_t *count);
 static t_status	write_conversions(\
 	const char *str, int *pos, va_list *p_args, ssize_t *count);
-static t_status	write_char(char c, int *pos, ssize_t *count);
 
 int	ft_printf(const char *str, ...)
 {
@@ -46,17 +43,10 @@ int	ft_printf(const char *str, ...)
 	return (count);
 }
 
-static t_status	write_char(char c, int *pos, ssize_t *count)
-{
-	(*pos)++;
-	if (ft_putchar_fd(c, STDOUT_FILENO) < 0)
-		return (err);
-	(*count)++;
-	return (ok);
-}
-
 static t_status	write_normal(const char *str, int *pos, ssize_t *count)
 {
+	int	len;
+
 	while (*(str + *pos) != '%' && *(str + *pos))
 	{
 		if (write_char((char) *(str + *pos), pos, count) == err)
@@ -69,19 +59,19 @@ static t_status	write_conversions(\
 	const char *str, int *pos, va_list *p_args, ssize_t *count)
 {	
 	if (ft_strchr(str, 'c'))
-		pf_char();
+		pf_char(str, pos, p_args, count);
 	else if (ft_strchr(str, 's'))
-		pf_str();
+		pf_str(str, pos, p_args, count);
 	else if (ft_strchr(str, 'p'))
-		pf_pointer();
+		pf_pointer(str, pos, p_args, count);
 	else if (ft_strchr(str, 'd'))
-		pf_int();
+		pf_int(str, pos, p_args, count);
 	else if (ft_strchr(str, 'i'))
-		pf_int();
+		pf_int(str, pos, p_args, count);
 	else if (ft_strchr(str, 'u'))
-		pf_unsigned();
+		pf_unsigned(str, pos, p_args, count);
 	else if (ft_strchr(str, 'x'))
-		pf_hex();
+		pf_hex(str, pos, p_args, count);
 	else if (ft_strchr(str, 'X'))
-		pf_hex();
+		pf_hex(str, pos, p_args, count);
 }

@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:12:26 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/18 10:55:58 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:49:01 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,15 @@
 # include "libft/libft.h"
 # include <stdarg.h>
 
-typedef enum e_pf_formats
-{
-	leftjustify,
-	forcesigns,
-	nosignspace,
-	hex_precessed0,
-	padzeros,
-	unsigned_i,
-	width,
-	precision,
-}	t_pf_formats;
+int			ft_printf(const char *, ...);
 
-typedef enum e_pf_flags
-{
-	character,
-	string,
-	pointer,
-	decimal,
-	integer,
-	unsigned_i,
-	hex_lower,
-	hex_upper,
-	percent,
-}	t_pf_flags;
-
-typedef struct s_print
-{
-	t_pf_formats	format;
-	const char		*start;
-	int				len;
-	t_pf_flags		*flags;
-	void			*value;
-	int				width;
-	int				precision;
-}	t_print;
+t_status	write_char(char c, int *pos, ssize_t *count);
+t_status	write_string(char *str, int *pos, ssize_t *count);
+t_status	pf_char(const char *str, int *pos, va_list *p_args, ssize_t *count);
+t_status	pf_str(const char *str, int *pos, va_list *p_args, ssize_t *count);
+t_status	pf_int(const char *str, int *pos, va_list *p_args, ssize_t *count);
+t_status	pf_unsigned(\
+	const char *str, int *pos, va_list *p_args, ssize_t *count);
+t_status	pf_hex(const char *str, int *pos, va_list *p_args, ssize_t *count);
 
 #endif
