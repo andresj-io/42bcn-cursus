@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:38:18 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/18 14:45:28 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/20 04:01:39 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
 int static	get_figures(unsigned int n);
 char static	*init_number(size_t len, int n);

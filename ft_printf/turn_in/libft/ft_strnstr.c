@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:37:38 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/18 10:21:36 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/23 05:03:11 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		return ((char *) haystack);
 	while (haystack[i] && i <= len)
 	{
-		if (haystack[i] == *needle && (nlen <= len - i) 
+		if (haystack[i] == *needle && (nlen <= len - i)
 			&& find_needle(haystack + i, needle))
 			return ((char *)haystack + i);
 		i++;
