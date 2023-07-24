@@ -6,7 +6,7 @@
 #    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/07/24 12:52:18 by ajacome-         ###   ########.fr        #
+#    Updated: 2023/07/24 13:26:52 by ajacome-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ SOURCES = ft_printf.c \
 	ft_printf_flags.c \
 	ft_printf_hex.c \
 	ft_printf_numbers.c \
-	ft_printf_parsef.c \
 	ft_printf_writes.c \
 
 # Extracted object files
