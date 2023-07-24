@@ -3,25 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: andresj <andresj@student.42.fr>            +#+  +:+       +#+         #
+#    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/07/23 15:50:25 by andresj          ###   ########.fr        #
+#    Updated: 2023/07/24 11:33:20 by ajacome-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# Directories to organize files
+DIROBJS = ./objs/
+DIRTEST = ./tests/
+DIRLIBFT = ./libft/
 
 # The name of the archived library
 NAME = libftprintf.a
 
 # Libraries to link with
-LIBRARY = libft/libft.a
-PRINTLIB = libftprintf.h
+LIBFT = $(DIRLIBFT)libft.a
+PRINTLIB = ft_printf.h
 
 # Frontend program when linking
 CC = gcc
 
 # Flags for compilation
 CFLAGS = -g -Wall -Wextra -Werror -I.
+
+RM = rm -f
+AR = ar rcs
 
 # The name of the source files
 SOURCES = ft_printf.c \
@@ -37,10 +45,16 @@ $(EXT_OBJ): $(LIBRARY:.a=.o)
 	ar -x $(LIBRARY)
 
 # This creates a list of object files from the source files
-OBJECTS = $(SOURCES:%.c=%.o)
+OBJECTS = $(addprefix $(DIROBJS), $(SOURCES:%.c=%.o))
 
-$(NAME): $(OBJECTS) $(EXT_OBJ)
-	ar rcs $@ $^
+$(DIROBJS):
+	mkdir -p $(DIROBJS)
+
+$(DIROBJS)%.o : $(DIRSRC)%.c $(PRINTLIB)
+	$(CC) $(FLAGS) -c $< -o $@
+
+$(NAME): $(LIBFT) $(DIROBJS) $(OBJECTS)
+	$(AR) $(NAME) $(OBJECTS)
 
 default: all
 
@@ -48,14 +62,21 @@ all: $(NAME)
 
 # Remove the object files
 clean:
-	rm -f $(OBJECTS) $(EXT_OBJ)
+	$(RM) $(OBJECTS) $(EXT_OBJ)
+	$(RM) $(addprefix $(DIROBJS), $(notdir$(OBJECTS)))
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
-%.o: %.c $(PRINTLIB) $(LIBRARY)
+$(LIBFT):
+	make -C $(DIRLIBFT) all
+
+test: $(DIRTEST)test.c $(NAME)
+	$(CC) $(CFLAGS) -o $@ $< $(NAME)
+
+%.o: %.c $(PRINTLIB) $(EXT_OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libft

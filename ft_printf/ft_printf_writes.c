@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_writes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:13:37 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/21 13:13:38 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/24 10:11:51 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 t_status	pf_write_char(char c, ssize_t *count)
 {
@@ -20,7 +20,7 @@ t_status	pf_write_char(char c, ssize_t *count)
 	return (ok);
 }
 
-t_status		pf_write_str(char *str, ssize_t *count)
+t_status	pf_write_str(char *str, ssize_t *count)
 {
 	int		printed;
 
@@ -38,7 +38,7 @@ t_status	pf_write_null(ssize_t *count)
 {
 	const char	*nuller = "(null)";
 
-	if (write_str(nuller, count) == err)
+	if (pf_write_str((char *) nuller, count) == err)
 		return (err);
 	return (ok);
 }

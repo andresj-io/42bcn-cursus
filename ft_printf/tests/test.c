@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strupper.c                                      :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/21 03:57:46 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/21 04:24:57 by andresj          ###   ########.fr       */
+/*   Created: 2023/07/24 10:13:54 by ajacome-          #+#    #+#             */
+/*   Updated: 2023/07/24 11:33:48 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../ft_printf.h"
 
-void	ft_strup_iter(unsigned int i, char *c)
+int	main(void)
 {
-	c[i] = ft_toupper(c[i]);
-}
-
-char	ft_strup_mapi(unsigned int i, char c)
-{
-	char	upper;
-
-	upper = ft_toupper(c);
+	ft_printf("THIS is a TEST");
+	return (0);
 }

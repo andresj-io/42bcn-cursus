@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ltox.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 05:37:52 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/21 08:44:58 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/24 10:19:12 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	get_buffer(unsigned long int num, char *buffer, int count);
+static void	get_buffer(unsigned long int num, char *buffer, int *count);
 char static	*init_number(size_t len, unsigned long int num);
 
 char	*ft_ltox(unsigned long int num)
@@ -23,7 +23,7 @@ char	*ft_ltox(unsigned long int num)
 
 	len = 0;
 	ft_bzero(buffer, 12);
-	get_buffer(num, buffer, len);
+	get_buffer(num, buffer, &len);
 	if (!len)
 		return (NULL);
 	hex = init_number(len, num);
@@ -42,20 +42,20 @@ char static	*init_number(size_t len, unsigned long int num)
 	hex = (char *) malloc(sizeof(char) * (len + 1));
 	if (!hex)
 		return (NULL);
-	hex[len + 1] = NULL;
+	hex[len + 1] = '\0';
 	if (num == 0)
 		hex[0] = '0';
 	return (hex);
 }
 
-static void	get_buffer(unsigned long int big, char *buffer, int count)
+static void	get_buffer(unsigned long int big, char *buffer, int *count)
 {
-	int					j;
-	int					smol;
+	int	j;
+	int	smol;
 
 	if (big == 0)
 	{
-		count = 3;
+		*count = 1;
 		return ;
 	}
 	j = 16;
@@ -67,5 +67,6 @@ static void	get_buffer(unsigned long int big, char *buffer, int count)
 		else
 			buffer[j] = ((smol - 10) + 'a');
 		big /= 0x10;
+		(*count)++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:38:18 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/20 04:01:39 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/24 10:21:27 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char static	*init_number(size_t len, int n)
 	number = (char *) malloc(sizeof(char) * (len + 1));
 	if (!number)
 		return (NULL);
-	number[len] = NULL;
+	number[len] = '\0';
 	if (n == 0)
 		number[0] = '0';
 	return (number);

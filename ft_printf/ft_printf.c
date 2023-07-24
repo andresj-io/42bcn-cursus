@@ -3,39 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:29:57 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/23 04:55:15 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/24 10:11:56 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static t_status	write_normal(const char *str, ssize_t *count);
-static t_status	write_conversions(char *str, va_list *arg, ssize_t *count);
-static t_status	execute_conversion(char *str, va_list *args, ssize_t *count);
-
-static void	determine_conversion(\
-	char *str, t_conversion conv, const char *cases);
-static t_status	pf_conversions(\
-	t_conversion conv, va_list *args, ssize_t *count);
+static t_status	write_conversions(char *str, va_list arg, ssize_t *count);
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
-	int			count;
-	char		*pstr;
+	ssize_t	count;
+	char	*pstr;
 
 	count = 0;
-	va_start(args, pstr);
+	va_start(args, str);
+	pstr = (char *) str;
 	if (!pstr || !*pstr)
-		return (err);
+		return (-1);
 	while (*pstr)
 	{
 		if (*pstr == '%')
 		{
-			if (write_conversions(pstr, args, count) == err)
+			if (write_conversions(pstr, args, &count) == err)
 				return (-1);
 		}
 		else if (write_normal(pstr, &count) == err)
@@ -47,8 +42,6 @@ int	ft_printf(const char *str, ...)
 
 static t_status	write_normal(const char *str, ssize_t *count)
 {
-	int	len;
-
 	while (*str != '%' && *str)
 	{
 		if (pf_write_char((char) *str, count) == err)
@@ -58,8 +51,8 @@ static t_status	write_normal(const char *str, ssize_t *count)
 	return (ok);
 }
 
-static t_status	write_conversions(char *str, va_list *arg, ssize_t *count)
-{	
+static t_status	write_conversions(char *str, va_list arg, ssize_t *count)
+{
 	str++;
 	if ((*str == 'c') && pf_char(str, arg, count) == err)
 		return (err);
@@ -67,7 +60,7 @@ static t_status	write_conversions(char *str, va_list *arg, ssize_t *count)
 		return (err);
 	else if ((*str == 'p') && pf_pointer(str, arg, count) == err)
 		return (err);
-	else if ((*str == 'i' || *cases == 'd') && pf_int(str, arg, count) == err)
+	else if ((*str == 'i' || *str == 'd') && pf_int(str, arg, count) == err)
 		return (err);
 	else if ((*str == 'u') && pf_unsigned(str, arg, count) == err)
 		return (err);
@@ -79,7 +72,15 @@ static t_status	write_conversions(char *str, va_list *arg, ssize_t *count)
 		return (err);
 	return (ok);
 }
+
 /*
+
+static void	determine_conversion(\
+	char *str, t_conversion conv, const char *cases);
+static t_status	pf_conversions(\
+	t_conversion conv, va_list args, ssize_t *count);
+
+
 static t_status	write_conversions(char *str, va_list *arg, ssize_t *count)
 {	
 	t_conversion	conv;

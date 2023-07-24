@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utox.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 04:01:20 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/21 06:02:55 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/24 10:21:52 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char static	*init_number(size_t len, int n)
 	hex = (char *) malloc(sizeof(char) * (len + 1));
 	if (!hex)
 		return (NULL);
-	hex[len + 1] = NULL;
+	hex[len + 1] = '\0';
 	if (n == 0)
 		hex[0] = '0';
 	return (hex);
