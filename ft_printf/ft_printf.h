@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:12:26 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/24 10:27:44 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/24 13:09:42 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ t_status	pf_write_str(char *str, ssize_t *count);
 t_status	pf_write_null(ssize_t *count);
 
 /* Specifiers */
-t_status	pf_percent(char *str, ssize_t *count);
-t_status	pf_char(const char *str, va_list p_args, ssize_t *count);
-t_status	pf_str(const char *str, va_list p_args, ssize_t *count);
-t_status	pf_int(const char *str, va_list p_args, ssize_t *count);
-t_status	pf_unsigned(const char *str, va_list p_args, ssize_t *count);
-t_status	pf_hex_lower(const char *str, va_list p_args, ssize_t *count);
-t_status	pf_hex_upper(const char *str, va_list p_args, ssize_t *count);
-t_status	pf_pointer(const char *str, va_list p_args, ssize_t *count);
+t_status	pf_percent(ssize_t *count);
+t_status	pf_char(va_list p_args, ssize_t *count);
+t_status	pf_str(va_list p_args, ssize_t *count);
+t_status	pf_int(va_list p_args, ssize_t *count);
+t_status	pf_unsigned(va_list p_args, ssize_t *count);
+t_status	pf_hex_lower(va_list p_args, ssize_t *count);
+t_status	pf_hex_upper(va_list p_args, ssize_t *count);
+t_status	pf_pointer(va_list p_args, ssize_t *count);
 
 /* Flags */
 char		*pf_add_hex_identifier(char *str);

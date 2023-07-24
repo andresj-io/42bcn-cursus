@@ -6,165 +6,76 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:29:57 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/24 10:11:56 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/24 14:18:03 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 static t_status	write_normal(const char *str, ssize_t *count);
-static t_status	write_conversions(char *str, va_list arg, ssize_t *count);
+static t_status	write_conversions(char spec, va_list arg, ssize_t *count);
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
 	ssize_t	count;
-	char	*pstr;
 
-	count = 0;
 	va_start(args, str);
-	pstr = (char *) str;
-	if (!pstr || !*pstr)
+	count = 0;
+	if (!str || !*str)
 		return (-1);
-	while (*pstr)
+	while (*str)
 	{
-		if (*pstr == '%')
+		if (*str == '%')
 		{
-			if (write_conversions(pstr, args, &count) == err)
+			if (write_conversions(*(++str), args, &count) == err)
 				return (-1);
 		}
-		else if (write_normal(pstr, &count) == err)
+		else if (pf_write_char(*str, &count) == err)
 			return (-1);
+		str++;
 	}
 	va_end(args);
 	return (count);
 }
 
-static t_status	write_normal(const char *str, ssize_t *count)
+static t_status	write_conversions(char spec, va_list arg, ssize_t *count)
 {
-	while (*str != '%' && *str)
-	{
-		if (pf_write_char((char) *str, count) == err)
-			return (err);
-		str++;
-	}
-	return (ok);
-}
-
-static t_status	write_conversions(char *str, va_list arg, ssize_t *count)
-{
-	str++;
-	if ((*str == 'c') && pf_char(str, arg, count) == err)
+	if ((spec == 'c') && pf_char(arg, count) == err)
 		return (err);
-	else if ((*str == 's') && pf_str(str, arg, count) == err)
+	else if ((spec == 's') && pf_str(arg, count) == err)
 		return (err);
-	else if ((*str == 'p') && pf_pointer(str, arg, count) == err)
+	else if ((spec == 'p') && pf_pointer(arg, count) == err)
 		return (err);
-	else if ((*str == 'i' || *str == 'd') && pf_int(str, arg, count) == err)
+	else if ((spec == 'i' || spec == 'd') && pf_int(arg, count) == err)
 		return (err);
-	else if ((*str == 'u') && pf_unsigned(str, arg, count) == err)
+	else if ((spec == 'u') && pf_unsigned(arg, count) == err)
 		return (err);
-	else if ((*str == 'x') && pf_hex_lower(str, arg, count) == err)
+	else if ((spec == 'x') && pf_hex_lower(arg, count) == err)
 		return (err);
-	else if ((*str == 'X') && pf_hex_upper(str, arg, count) == err)
+	else if ((spec == 'X') && pf_hex_upper(arg, count) == err)
 		return (err);
-	else if (pf_percent(str, count) == err)
+	else if ((spec == '%') && pf_percent(count) == err)
 		return (err);
 	return (ok);
 }
-
-/*
-
-static void	determine_conversion(\
-	char *str, t_conversion conv, const char *cases);
-static t_status	pf_conversions(\
-	t_conversion conv, va_list args, ssize_t *count);
-
-
-static t_status	write_conversions(char *str, va_list *arg, ssize_t *count)
-{	
-	t_conversion	conv;
-
-	str++;
-	determine_conversion(str, conv, "cspdiuxX");
-	if (conv.end)
-	{
-		conv.start = str;
-		if (pf_conversions(conv, args, count) == err)
-			return (err);
-	}
-	else if (conv.type = pfe_percent && pf_percent(str, count) == err)
-		return (err);
-	return (ok);
-}
-
-static t_status	execute_conversion(char *str, va_list *args, ssize_t *count)
+#include <stdio.h>
+int	main(void)
 {
-	if (*str == 'c')
-		conv.type = pfe_character;
-	else if (*str == 's')
-		conv.type = pfe_string;
-	else if (*str == 'p')
-		conv.type = pfe_pointer;
-	else if (*str == 'i' || *cases == 'd')
-		conv.type = pfe_integer;
-	else if (*str == 'u')
-		conv.type = pfe_unsigned_int;
-	else if (*str == 'x')
-		conv.type = pfe_hex_lower;
-	else if (*str == 'X')
-		conv.type = pfe_hex_upper;
-	return ;
-}
+	int	ret;
 
-static t_status	pf_conversions(t_conversion conv, va_list *args, ssize_t *count)
-{
-	
-	if ((*str == 'c') && pf_char(str, arg, count) == err)
-		return (err);
-	else if ((*str == 's') && pf_str(str, arg, count) == err)
-		return (err);
-	else if ((*str == 'p') && pf_pointer(str, arg, count) == err)
-		return (err);
-	else if ((*str == 'i' || *cases == 'd') 
-		&& pf_int(str, arg, count) == err)
-		return (err);
-	else if ((*str == 'u') && pf_unsigned(str, arg, count) == err)
-		return (err);
-	else if ((*str == 'x') && pf_hex_lower(str, arg, count) == err)
-		return (err);
-	else if ((*str == 'X') && pf_hex_upper(str, arg, count) == err)
-		return (err);
-	else if (pf_percent(str, count) == err)
-		return (err);
+	ret = 0;
+	// ret = ft_printf("HOLA\n");
+	// ret = ft_printf(" NULL %s NULL ", NULL);
+	// ret = ft_printf(" %p %p ", 0, 0);
+	ret = ft_printf("\n");
+	ret = printf(" %u %u %u %u %u %u %u",\
+		INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+	ret = ft_printf(" %u %u %u %u %u %u %u",\
+		INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+	ret = ft_printf("\n");
+	ret = ft_printf("\n");
+	ret = ft_printf("\n");
+	ret = ft_printf(" %x ", 0);
+	return (0);
 }
-
-static void	determine_conversion(\
-	char *str, t_conversion conv, const char *cases)
-{
-	while (*cases)
-	{
-		conv.end = ft_strchr(str, *cases);
-		if (found)
-		{
-			if (*cases == 'c')
-				conv.type = pfe_character;
-			else if (*cases == 's')
-				conv.type = pfe_string;
-			else if (*cases == 'p')
-				conv.type = pfe_pointer;
-			else if (*cases == 'i' || *cases == 'd')
-				conv.type = pfe_integer;
-			else if (*cases == 'u')
-				conv.type = pfe_unsigned_int;
-			else if (*cases == 'x')
-				conv.type = pfe_hex_lower;
-			else if (*cases == 'X')
-				conv.type = pfe_hex_upper;
-			return ;
-		}
-		cases++;
-	}
-	conv.type = pfe_percent;
-}
-*/

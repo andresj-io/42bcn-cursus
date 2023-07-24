@@ -6,13 +6,13 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 04:01:20 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/24 10:21:52 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/24 14:05:53 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	get_buffer(uint32_t n, char *buffer, int count);
+static void	get_buffer(uint32_t n, char *buffer, int *count);
 char static	*init_number(size_t len, int n);
 
 char	*ft_utox(unsigned int ui)
@@ -23,7 +23,7 @@ char	*ft_utox(unsigned int ui)
 
 	len = 0;
 	ft_bzero(buffer, 10);
-	get_buffer(ui, buffer, len);
+	get_buffer(ui, buffer, &len);
 	if (!len)
 		return (NULL);
 	hex = init_number(len, ui);
@@ -49,18 +49,18 @@ char static	*init_number(size_t len, int n)
 	return (hex);
 }
 
-static void	get_buffer(uint32_t n, char *buffer, int count)
+static void	get_buffer(uint32_t n, char *buffer, int *count)
 {
 	const char	hex_digits[17] = "0123456789ABCDEF";
 
 	if (n == 0)
 	{
-		count = 1;
+		*count = 1;
 		return ;
 	}
 	while (n != 0)
 	{
-		buffer[count++] = hex_digits[n & 0xF];
+		buffer[(*count)++] = hex_digits[n & 0xF];
 		n >>= 4;
 	}
 }

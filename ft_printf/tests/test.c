@@ -6,14 +6,17 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:13:54 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/24 11:33:48 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/24 12:57:38 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+// #include "../ft_printf.h"
 
-int	main(void)
-{
-	ft_printf("THIS is a TEST");
-	return (0);
-}
+// int	main(void)
+// {
+// 	int	ret;
+
+// 	ret = 0;
+// 	ret = ft_printf("HOLA\n");
+// 	return (0);
+// }
