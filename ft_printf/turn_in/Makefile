@@ -6,7 +6,7 @@
 #    By: andresj <andresj@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/07/23 05:41:39 by andresj          ###   ########.fr        #
+#    Updated: 2023/07/23 15:50:25 by andresj          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@
 NAME = libftprintf.a
 
 # Libraries to link with
-LIBRARIES = libft/libft.a
+LIBRARY = libft/libft.a
+PRINTLIB = libftprintf.h
 
 # Frontend program when linking
 CC = gcc
@@ -30,12 +31,10 @@ SOURCES = ft_printf.c \
 	ft_printf_numbers.c \
 	ft_printf_parsef.c \
 	ft_printf_writes.c \
-	libft \
-	libftprintf.h
 
 # Extracted object files
-$(EXT_OBJ): $(LIBRARIES:.a=.o)
-	ar -x $(LIBRARIES)
+$(EXT_OBJ): $(LIBRARY:.a=.o)
+	ar -x $(LIBRARY)
 
 # This creates a list of object files from the source files
 OBJECTS = $(SOURCES:%.c=%.o)
@@ -56,7 +55,7 @@ fclean: clean
 
 re: fclean all
 
-%.o: %.c $(HEAD)
+%.o: %.c $(PRINTLIB) $(LIBRARY)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: all clean fclean re
