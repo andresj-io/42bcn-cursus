@@ -6,40 +6,38 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:29:57 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/24 10:11:56 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/24 13:02:41 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 static t_status	write_normal(const char *str, ssize_t *count);
-static t_status	write_conversions(char *str, va_list arg, ssize_t *count);
+static t_status	write_conversions(char spec, va_list arg, ssize_t *count);
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
 	ssize_t	count;
-	char	*pstr;
 
-	count = 0;
 	va_start(args, str);
-	pstr = (char *) str;
-	if (!pstr || !*pstr)
+	count = 0;
+	if (!str || !*str)
 		return (-1);
-	while (*pstr)
+	while (*str)
 	{
-		if (*pstr == '%')
+		if (*str == '%')
 		{
-			if (write_conversions(pstr, args, &count) == err)
+			if (write_conversions(str, args, &count) == err)
 				return (-1);
 		}
-		else if (write_normal(pstr, &count) == err)
+		else if (pf_write_char(*str, count) == err)
 			return (-1);
 	}
 	va_end(args);
 	return (count);
 }
-
+/*
 static t_status	write_normal(const char *str, ssize_t *count)
 {
 	while (*str != '%' && *str)
@@ -50,25 +48,25 @@ static t_status	write_normal(const char *str, ssize_t *count)
 	}
 	return (ok);
 }
+*/
 
-static t_status	write_conversions(char *str, va_list arg, ssize_t *count)
+static t_status	write_conversions(char spec, va_list arg, ssize_t *count)
 {
-	str++;
-	if ((*str == 'c') && pf_char(str, arg, count) == err)
+	if ((spec == 'c') && pf_char(spec, arg, count) == err)
 		return (err);
-	else if ((*str == 's') && pf_str(str, arg, count) == err)
+	else if ((spec == 's') && pf_str(spec, arg, count) == err)
 		return (err);
-	else if ((*str == 'p') && pf_pointer(str, arg, count) == err)
+	else if ((spec == 'p') && pf_pointer(spec, arg, count) == err)
 		return (err);
-	else if ((*str == 'i' || *str == 'd') && pf_int(str, arg, count) == err)
+	else if ((spec == 'i' || spec == 'd') && pf_int(spec, arg, count) == err)
 		return (err);
-	else if ((*str == 'u') && pf_unsigned(str, arg, count) == err)
+	else if ((spec == 'u') && pf_unsigned(spec, arg, count) == err)
 		return (err);
-	else if ((*str == 'x') && pf_hex_lower(str, arg, count) == err)
+	else if ((spec == 'x') && pf_hex_lower(spec, arg, count) == err)
 		return (err);
-	else if ((*str == 'X') && pf_hex_upper(str, arg, count) == err)
+	else if ((spec == 'X') && pf_hex_upper(spec, arg, count) == err)
 		return (err);
-	else if (pf_percent(str, count) == err)
+	else if (pf_percent(spec, count) == err)
 		return (err);
 	return (ok);
 }
@@ -168,3 +166,13 @@ static void	determine_conversion(\
 	conv.type = pfe_percent;
 }
 */
+
+int	main(void)
+{
+	int	ret;
+
+	ret = 0;
+	ret = ft_printf("HOLA\n");
+	return (0);
+}
+
