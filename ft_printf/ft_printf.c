@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 11:29:57 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/24 14:12:07 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/24 14:18:03 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,23 @@ static t_status	write_conversions(char spec, va_list arg, ssize_t *count)
 		return (err);
 	return (ok);
 }
-
+#include <stdio.h>
 int	main(void)
 {
 	int	ret;
 
 	ret = 0;
-	ret = ft_printf("HOLA\n");
-	ret = ft_printf(" NULL %s NULL ", NULL);
-	ret = ft_printf(" %p %p ", 0, 0);
+	// ret = ft_printf("HOLA\n");
+	// ret = ft_printf(" NULL %s NULL ", NULL);
+	// ret = ft_printf(" %p %p ", 0, 0);
 	ret = ft_printf("\n");
+	ret = printf(" %u %u %u %u %u %u %u",\
+		INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
 	ret = ft_printf(" %u %u %u %u %u %u %u",\
 		INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+	ret = ft_printf("\n");
+	ret = ft_printf("\n");
+	ret = ft_printf("\n");
 	ret = ft_printf(" %x ", 0);
 	return (0);
 }
