@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_hex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 05:06:07 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/24 13:42:19 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/28 07:47:06 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ t_status	pf_hex_lower(va_list p_args, ssize_t *count)
 	if (!numc)
 		return (err);
 	if (pf_write_str(numc, count) == err)
+	{
+		free(numc);
 		return (err);
+	}
 	free(numc);
 	return (ok);
 }
@@ -38,31 +41,39 @@ t_status	pf_hex_upper(va_list p_args, ssize_t *count)
 	if (!numc)
 		return (err);
 	if (pf_write_str(numc, count) == err)
+	{
+		free(numc);
 		return (err);
+	}
 	free(numc);
 	return (ok);
 }
 
 t_status	pf_pointer(va_list p_args, ssize_t *count)
 {
-	unsigned long int	pointer;
-	char				*numc;
+	void	*pointer;
+	char	*numl;
+	char	*out;
 
-	pointer = va_arg(p_args, unsigned long int);
+	pointer = va_arg(p_args, void *);
 	if (!pointer)
 	{
-		if (pf_write_null(count) == err)
+		if (pf_write_str("0x0", count) == err)
 			return (err);
 		return (ok);
 	}
-	numc = ft_ltox(pointer);
-	if (!numc)
+	numl = ft_lltox((unsigned long long)pointer);
+	if (!numl)
 		return (err);
-	numc = pf_add_hex_identifier(numc);
-	if (!numc)
+	out = pf_add_hex_identifier(numl);
+	free(numl);
+	if (!out)
 		return (err);
-	if (pf_write_str(numc, count) == err)
+	if (pf_write_str(out, count) == err)
+	{
+		free(out);
 		return (err);
-	free(numc);
+	}
+	free(out);
 	return (ok);
 }

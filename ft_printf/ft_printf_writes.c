@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_writes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:13:37 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/24 13:45:27 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/25 04:45:51 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_status	pf_write_str(char *str, ssize_t *count)
 
 t_status	pf_write_null(ssize_t *count)
 {
-	const char	*nuller = "(null)";
+	const char	*nuller = "0x0";
 
 	if (pf_write_str((char *) nuller, count) == err)
 		return (err);

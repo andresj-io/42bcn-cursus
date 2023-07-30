@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_numbers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:24:23 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/24 13:42:06 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/28 07:46:24 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ t_status	pf_int(va_list p_args, ssize_t *count)
 	if (!numc)
 		return (err);
 	if (pf_write_str(numc, count) == err)
+	{
+		free(numc);
 		return (err);
+	}
 	free(numc);
 	return (ok);
 }
@@ -37,7 +40,10 @@ t_status	pf_unsigned(va_list p_args, ssize_t *count)
 	if (!numc)
 		return (err);
 	if (pf_write_str(numc, count) == err)
+	{
+		free(numc);
 		return (err);
+	}
 	free(numc);
 	return (ok);
 }

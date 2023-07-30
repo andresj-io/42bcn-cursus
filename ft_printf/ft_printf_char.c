@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:02:18 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/24 13:49:31 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/25 04:53:15 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_status	pf_str(va_list p_args, ssize_t *count)
 	s1 = va_arg(p_args, char *);
 	if (!s1)
 	{
-		if (pf_write_null(count) == err)
+		if (pf_write_str("(null)", count) == err)
 			return (err);
 		return (ok);
 	}

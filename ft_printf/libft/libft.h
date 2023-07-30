@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 07:59:36 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/24 10:07:38 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/25 03:47:00 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*ft_itoa(int n);
 char	*ft_utoa(unsigned int ui);
 char	*ft_utox(unsigned int ui);
 char	*ft_ltox(unsigned long int num);
+char	*ft_lltox(unsigned long long num);
 
 /* Memory operators */
 void	ft_bzero(void *s, int n);
@@ -75,9 +76,8 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-void	ft_strrev(char *str, int size);
+void	ft_strrev(char *str);
 void	ft_strup_iter(unsigned int i, char *c);
-char	ft_strup_mapi(unsigned int i, char c);
 
 /* Write functions */
 ssize_t	ft_putchar_fd(char c, int fd);

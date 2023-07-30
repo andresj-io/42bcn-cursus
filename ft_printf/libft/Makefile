@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
+#    By: andresj <andresj@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/07/24 11:49:25 by ajacome-         ###   ########.fr        #
+#    Updated: 2023/07/25 03:36:17 by andresj          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SOURCES = ft_utox.c \
 ft_utoa.c \
 ft_strupper.c \
 ft_ltox.c \
+ft_lltox.c \
 ft_strnstr.c \
 ft_strrev.c \
 ft_split.c \

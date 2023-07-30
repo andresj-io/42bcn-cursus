@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utox.c                                          :+:      :+:    :+:   */
+/*   ft_lltox.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/20 04:01:20 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/25 02:46:46 by andresj          ###   ########.fr       */
+/*   Created: 2023/07/21 05:37:52 by andresj           #+#    #+#             */
+/*   Updated: 2023/07/25 05:04:47 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	get_buffer(uint32_t n, char *buffer, int *count);
-char static	*init_number(size_t len, int n);
+static void	get_buffer(unsigned long long num, char *buffer, int *count);
+char static	*init_number(size_t len, unsigned long long num);
 
-char	*ft_utox(unsigned int ui)
+char	*ft_lltox(unsigned long long num)
 {
 	char	*hex;
-	char	buffer[10];
+	char	buffer[15];
 	int		len;
 
 	len = 0;
-	ft_bzero(buffer, 10);
-	get_buffer(ui, buffer, &len);
+	ft_bzero(buffer, 15);
+	get_buffer(num, buffer, &len);
 	if (!len)
 		return (NULL);
-	hex = init_number(len, ui);
-	if (ui == 0)
+	hex = init_number(len, num);
+	if (num == 0)
 		return (hex);
 	else if (!hex)
 		return (NULL);
@@ -36,32 +36,32 @@ char	*ft_utox(unsigned int ui)
 	return (hex);
 }
 
-char static	*init_number(size_t len, int n)
+char static	*init_number(size_t len, unsigned long long num)
 {
 	char	*hex;
 
-	hex = (char *) malloc(sizeof(char) * len);
+	hex = (char *) ft_calloc(len, sizeof(char));
 	if (!hex)
 		return (NULL);
 	hex[len] = '\0';
-	if (n == 0)
+	if (num == 0)
 		hex[0] = '0';
 	return (hex);
 }
 
-static void	get_buffer(uint32_t n, char *buffer, int *count)
+static void	get_buffer(unsigned long long big, char *buffer, int *count)
 {
 	const char	hex_digits[17] = "0123456789abcdef";
 
-	if (n == 0)
+	if (big == 0)
 	{
 		*count = 1;
 		return ;
 	}
-	while (n != 0)
+	while (big != 0)
 	{
-		buffer[(*count)++] = hex_digits[n & 0xF];
-		n >>= 4;
+		buffer[(*count)++] = hex_digits[big & 0xF];
+		big >>= 4;
 	}
 	(*count)++;
 }
