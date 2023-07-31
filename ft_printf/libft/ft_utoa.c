@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:38:18 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/24 10:21:27 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:48:27 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int static	get_figures(unsigned int n);
 char static	*init_number(size_t len, int n);
@@ -50,6 +50,8 @@ int static	get_figures(unsigned int n)
 	int	len;
 
 	len = 0;
+	if (n == 0)
+		return (1);
 	while (n != 0)
 	{
 		n /= 10;

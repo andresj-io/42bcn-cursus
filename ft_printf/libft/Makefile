@@ -3,14 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: andresj <andresj@student.42.fr>            +#+  +:+       +#+         #
+#    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/07/25 03:36:17 by andresj          ###   ########.fr        #
+#    Updated: 2023/07/31 18:53:08 by ajacome-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-DIROBJS = ./objs/
+OBJ_DIR = ./obj/
+SRC_DIR = ./src/
 
 # The name of the archived library
 NAME = libft.a
@@ -22,10 +23,14 @@ HEAD = libft.h
 CC = gcc
 
 # Flags for compilation
-CFLAGS = -g -Wall -Wextra -Werror -I.
+CFLAGS 		:= -g -Wall -Wextra -Werror
+# -I is a preprocessor flag, not a compiler flag
+CPPFLAGS	:= -I include/ -MMD -MP
 
 # The name of the source files
-SOURCES = ft_utox.c \
+SRC = $(wildcard $(SRC_DIR)/*.c)
+SRC = \
+ft_utox.c \
 ft_utoa.c \
 ft_strupper.c \
 ft_ltox.c \
@@ -67,9 +72,7 @@ ft_strncmp.c \
 ft_substr.c \
 ft_tolower.c \
 ft_toupper.c \
-
-
-BONUSSRC = ft_lstnew.c \
+ft_lstnew.c \
 ft_lstadd_front.c \
 ft_lstsize.c \
 ft_lstlast.c \
@@ -77,35 +80,30 @@ ft_lstadd_back.c \
 ft_lstdelone.c \
 ft_lstclear.c \
 ft_lstiter.c \
-ft_lstmap.c \
+ft_lstmap.c 
 
 # This creates a list of object files from the source files
-OBJECTS = $(SOURCES:%.c=%.o)
-BONUSOBJECTS = $(BONUSSRC:%.c=%.o)
-
-$(NAME): $(OBJECTS)
-	ar rcs $@ $^
+OBJ := $(addprefix $(OBJ_DIR), $(SRC:%.c=%.o))
 
 default: all
 
 all: $(NAME)
 
-# Remove the object files
+$(OBJ_DIR)%.o: %.c $(OBJ_DIR) Makefile
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
+$(NAME): $(OBJ_DIR) $(OBJ)
+	ar rcs $@ $(OBJ)
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
 clean:
-	rm -f $(OBJECTS) $(BONUSOBJECTS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-bonus: .bonus
-
-.bonus: $(BONUSOBJECTS) $(OBJECTS)
-	ar rcs $(NAME) $(BONUSOBJECTS) $(OBJECTS)
-	touch .bonus
-
-%.o: %.c $(HEAD) Makefile
-	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: all clean fclean re

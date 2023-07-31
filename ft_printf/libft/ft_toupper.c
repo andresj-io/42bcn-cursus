@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:33:30 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/15 18:03:32 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:48:32 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	ft_toupper(int c)
 {

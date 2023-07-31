@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utox.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 04:01:20 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/25 02:46:46 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/31 18:48:13 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 static void	get_buffer(uint32_t n, char *buffer, int *count);
 char static	*init_number(size_t len, int n);

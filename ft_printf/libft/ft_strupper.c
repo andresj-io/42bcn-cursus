@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strupper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 03:57:46 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/25 03:22:55 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/31 18:48:53 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_strup_iter(unsigned int i, char *c)
 {

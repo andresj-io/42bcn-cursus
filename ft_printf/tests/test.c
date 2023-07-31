@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:13:54 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/28 07:43:22 by andresj          ###   ########.fr       */
+/*   Updated: 2023/07/31 09:24:29 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../ft_printf.h"
 #include <stdio.h>
@@ -18,12 +17,17 @@ int	main(void)
 {
 	int	ret;
 
-	ret = 0;
+	ret = ft_printf(" %u\n %u\n %u\n %u\n %u\n %u\n %u\n", \
+		INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+	return (0);
+}
+
+/*
 	// ret = ft_printf("HOLA\n");
 	// ret = ft_printf(" NULL %s NULL ", NULL);
-	ret = printf(" %p %p ", NULL, NULL);
-	ret = ft_printf(" %p", &ret);
-	ret = ft_printf(" %p %p ", NULL, NULL);
+	// ret = printf(" %p %p ", NULL, NULL);
+	// ret = ft_printf(" %p", &ret);
+	// ret = ft_printf(" %p %p ", NULL, NULL);
 	// ret = ft_printf("\n");
 	// ret = printf(" %u %u %u %u %u %u %u",\
 	// 	INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
@@ -77,7 +81,8 @@ int	main(void)
 	// ret = ft_printf("\n");
 	// ret = ft_printf(" %X ", 9223372036854775807LL);
 	// ret = ft_printf("\n");
-	// ret = ft_printf(" %X %X %X %X %X %X %X", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+	// ret = ft_printf(" %X %X %X %X %X %X %X",\
+		INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
 	// ret = ft_printf("\n");
 	// ret = ft_printf(" %p ", -1);
 	// ret = ft_printf(" %p ", 1);
@@ -88,6 +93,4 @@ int	main(void)
 	// ret = ft_printf(" %p %p ", INT_MIN, INT_MAX);
 	// ret = ft_printf(" %p %p ", ULONG_MAX, -ULONG_MAX);
 	// ret = ft_printf(" %p %p ", 0, 0);
-
-	return (0);
-}
+*/

@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 22:50:11 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/18 10:21:36 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:48:59 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 t_status static	seek(char c, const char *set);
 

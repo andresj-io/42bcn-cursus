@@ -6,12 +6,12 @@
 #    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/07/24 13:26:52 by ajacome-         ###   ########.fr        #
+#    Updated: 2023/07/31 18:46:31 by ajacome-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Directories to organize files
-DIROBJS = ./objs/
+OBJ_DIR = ./objs/
 DIRTEST = ./tests/
 DIRLIBFT = ./libft/
 
@@ -26,7 +26,9 @@ PRINTLIB = ft_printf.h
 CC = gcc
 
 # Flags for compilation
-CFLAGS = -g -Wall -Wextra -Werror -I.
+CFLAGS = -g -Wall -Wextra -Werror
+# -I is a preprocessor flag, not a compiler flag
+CPPFLAGS	:= -I include/ -MMD -MP
 
 RM = rm -f
 AR = ar rcs
@@ -39,45 +41,39 @@ SOURCES = ft_printf.c \
 	ft_printf_numbers.c \
 	ft_printf_writes.c \
 
-# Extracted object files
-$(EXT_OBJ): $(LIBRARY:.a=.o)
-	ar -x $(LIBRARY)
-
 # This creates a list of object files from the source files
-OBJECTS = $(addprefix $(DIROBJS), $(SOURCES:%.c=%.o))
+OBJ = $(addprefix $(OBJ_DIR), $(SOURCES:%.c=%.o))
 
-$(DIROBJS):
-	mkdir -p $(DIROBJS)
+$(OBJ_DIR)%.o : %.c $(OBJ_DIR) Makefile
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
-$(DIROBJS)%.o : %.c $(PRINTLIB) $(EXT_OBJ)
-	$(CC) $(FLAGS) -c $< -o $@
+default:	all
 
-$(NAME): $(LIBFT) $(DIROBJS) $(OBJECTS) $(EXT_OBJ)
+all:		$(NAME)
+
+$(NAME): $(LIBFT) $(OBJ_DIR) $(OBJ)
 	cp $(LIBFT) $(NAME)
-	$(AR) $(NAME) $(OBJECTS) $(EXT_OBJ)
+	$(AR) $(NAME) $(OBJ)
 
-default: all
+# Make libft
+$(LIBFT):
+	make -C $(DIRLIBFT) all
 
-all: $(NAME)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 # Remove the object files
 clean:
-	$(RM) $(OBJECTS)
-	$(RM) $(EXT_OBJ)
-	$(RM) -r $(DIROBJS)
+	make -C $(DIRLIBFT) clean
+	$(RM) -r $(OBJ_DIR)
 
 fclean: clean
+	make -C $(DIRLIBFT) fclean
 	$(RM) $(NAME)
 
 re: fclean all
 
-$(LIBFT):
-	make -C $(DIRLIBFT) all
-
-test: $(DIRTEST)test.c $(OBJECTS) $(LIBFT)
-	$(CC) $(CFLAGS) -o ./tests/$@ $< $(OBJECTS) $(LIBFT)
-
-# %.o: %.c $(PRINTLIB) $(EXT_OBJ)
-# 	$(CC) $(CFLAGS) -c $< -o $@
+test: $(DIRTEST)test.c $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) -o ./tests/$@ $< $(OBJ) $(LIBFT)
 
 .PHONY: all clean fclean re libft
