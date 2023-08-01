@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 18:49:27 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/15 12:08:55 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/01 09:27:33 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 char		*ft_itoa(int n);
 int static	get_figq(int n);

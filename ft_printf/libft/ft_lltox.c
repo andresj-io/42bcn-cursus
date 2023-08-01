@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lltox.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 05:37:52 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/25 05:04:47 by andresj          ###   ########.fr       */
+/*   Updated: 2023/08/01 09:27:39 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 static void	get_buffer(unsigned long long num, char *buffer, int *count);
 char static	*init_number(size_t len, unsigned long long num);

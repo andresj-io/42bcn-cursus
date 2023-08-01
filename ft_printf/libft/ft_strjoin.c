@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 22:36:39 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/13 18:12:42 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/01 09:34:29 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

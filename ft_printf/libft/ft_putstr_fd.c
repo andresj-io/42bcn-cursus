@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 12:43:49 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/18 10:12:20 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/01 09:33:50 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 ssize_t	ft_putstr_fd(char *s, int fd)
 {

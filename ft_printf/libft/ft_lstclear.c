@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 13:52:52 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/15 19:26:17 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/01 09:27:49 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {

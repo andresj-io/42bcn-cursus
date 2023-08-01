@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 12:52:53 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/15 18:08:59 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/01 09:27:46 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {

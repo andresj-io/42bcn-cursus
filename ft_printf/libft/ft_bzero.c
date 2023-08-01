@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:33:26 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/13 13:54:07 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/01 09:26:52 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 void	ft_bzero(void *s, int n)
 {

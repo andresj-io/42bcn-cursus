@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:26:02 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/07/13 15:30:33 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/01 09:27:17 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int	is_upper(int c)
 {

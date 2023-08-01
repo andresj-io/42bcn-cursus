@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:37:11 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/13 15:11:04 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/01 09:26:45 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 int static	is_space(char c);
 int static	is_number(char c);
