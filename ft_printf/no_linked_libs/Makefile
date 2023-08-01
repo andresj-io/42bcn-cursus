@@ -6,7 +6,7 @@
 #    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/08/01 12:30:30 by ajacome-         ###   ########.fr        #
+#    Updated: 2023/08/01 13:15:17 by ajacome-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,13 +29,14 @@ ft_calloc.c \
 ft_iscases.c \
 ft_itoa.c \
 ft_lltox.c \
-ft_ltox.c \
 ft_printf.c \
 ft_printf_char.c \
 ft_printf_flags.c \
 ft_printf_hex.c \
 ft_printf_numbers.c \
 ft_printf_writes.c \
+ft_putchar_fd.c \
+ft_putstr_fd.c \
 ft_striteri.c \
 ft_strlcpy.c \
 ft_strlen.c \
@@ -83,12 +84,10 @@ $(NAME): $(objects_dir) $(objects)
 
 # Remove the object files
 clean:
-	make -C $(libft_dir) clean
-	$(RM) -r $(objects_dir)
+	rm -rf $(objects_dir)
 
 fclean: clean
-	make -C $(libft_dir) fclean
-	$(RM) $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 

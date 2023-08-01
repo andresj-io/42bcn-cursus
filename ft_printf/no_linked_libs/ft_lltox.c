@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 05:37:52 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/01 12:23:51 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:04:32 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char static	*init_number(size_t len, unsigned long long num)
 {
 	char	*hex;
 
-	hex = (char *) ft_calloc(len, sizeof(char));
+	hex = (char *) ft_calloc(len + 1, sizeof(char));
 	if (!hex)
 		return (NULL);
 	hex[len] = '\0';

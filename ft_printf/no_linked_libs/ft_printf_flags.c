@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:46:19 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/08/01 10:58:00 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:23:20 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*pf_add_hex_identifier(char *str)
 	int		len;
 
 	len = ft_strlen(str) + 3;
-	formated = ft_calloc(len, sizeof(char *));
+	formated = (char *) malloc(sizeof(char) * len);
 	if (!formated)
 		return (NULL);
 	while (--len)
