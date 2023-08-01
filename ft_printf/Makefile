@@ -6,21 +6,21 @@
 #    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/07/31 18:46:31 by ajacome-         ###   ########.fr        #
+#    Updated: 2023/08/01 10:57:10 by ajacome-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Directories to organize files
-OBJ_DIR = ./objs/
-DIRTEST = ./tests/
-DIRLIBFT = ./libft/
+objects_dir = ./objs/
+test_dir = ./tests/
+libft_dir = ./libft/
 
 # The name of the archived library
 NAME = libftprintf.a
 
 # Libraries to link with
-LIBFT = $(DIRLIBFT)libft.a
-PRINTLIB = ft_printf.h
+libft = $(libft_dir)libft.a
+print_head = ft_printf.h
 
 # Frontend program when linking
 CC = gcc
@@ -42,38 +42,38 @@ SOURCES = ft_printf.c \
 	ft_printf_writes.c \
 
 # This creates a list of object files from the source files
-OBJ = $(addprefix $(OBJ_DIR), $(SOURCES:%.c=%.o))
+OBJ = $(addprefix $(objects_dir), $(SOURCES:%.c=%.o))
 
-$(OBJ_DIR)%.o : %.c $(OBJ_DIR) Makefile
+$(objects_dir)%.o : %.c $(objects_dir) Makefile
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 default:	all
 
 all:		$(NAME)
 
-$(NAME): $(LIBFT) $(OBJ_DIR) $(OBJ)
-	cp $(LIBFT) $(NAME)
+$(NAME): $(libft) $(objects_dir) $(OBJ)
+	cp $(libft) $(NAME)
 	$(AR) $(NAME) $(OBJ)
 
 # Make libft
-$(LIBFT):
-	make -C $(DIRLIBFT) all
+$(libft):
+	make -C $(libft_dir) all
 
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+$(objects_dir):
+	mkdir -p $(objects_dir)
 
 # Remove the object files
 clean:
-	make -C $(DIRLIBFT) clean
-	$(RM) -r $(OBJ_DIR)
+	make -C $(libft_dir) clean
+	$(RM) -r $(objects_dir)
 
 fclean: clean
-	make -C $(DIRLIBFT) fclean
+	make -C $(libft_dir) fclean
 	$(RM) $(NAME)
 
 re: fclean all
 
-test: $(DIRTEST)test.c $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) -o ./tests/$@ $< $(OBJ) $(LIBFT)
+test: $(test_dir)test.c $(OBJ) $(libft)
+	$(CC) $(CFLAGS) -o ./tests/$@ $< $(OBJ) $(libft)
 
 .PHONY: all clean fclean re libft
