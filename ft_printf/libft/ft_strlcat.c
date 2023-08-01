@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:33:32 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/13 16:16:35 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/01 09:34:31 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {

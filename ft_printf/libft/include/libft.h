@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 07:59:36 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/25 03:47:00 by andresj          ###   ########.fr       */
+/*   Updated: 2023/08/01 09:29:54 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_strup_iter(unsigned int i, char *c);
 /* Write functions */
 ssize_t	ft_putchar_fd(char c, int fd);
 ssize_t	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
+ssize_t	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 // ssize_t	ft_putnbr_base(int nbr, char *base);
 

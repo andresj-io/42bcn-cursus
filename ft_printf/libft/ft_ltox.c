@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 05:37:52 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/24 10:19:12 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/01 09:28:44 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 static void	get_buffer(unsigned long int num, char *buffer, int *count);
 char static	*init_number(size_t len, unsigned long int num);

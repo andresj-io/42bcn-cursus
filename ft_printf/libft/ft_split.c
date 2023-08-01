@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 23:09:01 by andresj           #+#    #+#             */
-/*   Updated: 2023/07/18 10:21:36 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/01 09:34:01 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include/libft.h"
 
 char			**ft_split(char const *s, char c);
 static int		count_words(char const *s, char c);
