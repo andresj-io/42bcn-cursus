@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:13:37 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/01 13:16:40 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/02 09:32:36 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,13 @@ t_status	pf_write_str(char *str, ssize_t *count)
 		*count += printed;
 		return (ok);
 	}
+}
+
+t_status	pf_write_null(ssize_t *count)
+{
+	const char	*nuller = "0x0";
+
+	if (pf_write_str((char *) nuller, count) == err)
+		return (err);
+	return (ok);
 }

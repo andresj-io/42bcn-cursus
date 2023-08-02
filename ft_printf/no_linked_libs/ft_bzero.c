@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:33:26 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/01 12:24:32 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/02 09:57:37 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,5 @@
 
 void	ft_bzero(void *s, int n)
 {
-	unsigned char	*a;
-
-	a = s;
-	while (n--)
-		*a++ = 0;
+	ft_memset(s, 0, n);
 }

@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:12:26 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/08/01 12:33:34 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/02 10:14:24 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <errno.h>
 # include <limits.h>
 # include <stdint.h>
+
+# define NULL_HEX "0x0"
 
 typedef enum e_status
 {
@@ -41,19 +43,18 @@ int			is_upper(int c);
 char		*ft_itoa(int n);
 char		*ft_utoa(unsigned int ui);
 char		*ft_utox(unsigned int ui);
-char		*ft_ltox(unsigned long int num);
 char		*ft_lltox(unsigned long long num);
 
 /* Memory operators */
 void		ft_bzero(void *s, int n);
 void		*ft_calloc(size_t count, size_t size);
+void		*ft_memset(void *b, int c, size_t len);
 
 /* String Manipulations */
-char		*ft_strdup(const char *s1);
+void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t		ft_strlen(const char *s);
 int			ft_toupper(int c);
-void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 void		ft_strrev(char *str);
 void		ft_strup_iter(unsigned int i, char *c);
 

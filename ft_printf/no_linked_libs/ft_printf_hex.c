@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 05:06:07 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/01 13:11:38 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/02 09:32:41 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_status	pf_pointer(va_list p_args, ssize_t *count)
 	pointer = va_arg(p_args, void *);
 	if (!pointer)
 	{
-		if (pf_write_str("0x0", count) == err)
+		if (pf_write_str((char *) NULL_HEX, count) == err)
 			return (err);
 		return (ok);
 	}

@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_flags.c                                  :+:      :+:    :+:   */
+/*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 12:46:19 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/08/02 11:26:34 by ajacome-         ###   ########.fr       */
+/*   Created: 2023/08/02 11:33:01 by ajacome-          #+#    #+#             */
+/*   Updated: 2023/08/02 11:54:12 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/ft_printf.h"
+#ifndef TEST_H
+# define TEST_H
 
-char	*pf_add_hex_identifier(char *str)
-{
-	char	*formated;
-	int		len;
-	int		i;
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define YELLOW "\033[0;33m"
+# define RESET "\033[0m"
+# include <stdio.h>
 
-	len = ft_strlen(str) + 3;
-	formated = ft_calloc(len, sizeof(char));
-	if (!formated)
-		return (NULL);
-	formated[0] = '0';
-	formated[1] = 'x';
-	i = 0;
-	while (str[i])
-	{
-		formated[i + 2] = str[i];
-		i++;
-	}
-	formated[--len] = '\0';
-	return (formated);
-}
+void	test_pointers(void);
+void	print_result(int result);
+
+#endif

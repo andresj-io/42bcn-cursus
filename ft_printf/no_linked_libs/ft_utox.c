@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 04:01:20 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/01 13:17:58 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/02 12:12:56 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ char static	*init_number(size_t len, int n)
 {
 	char	*hex;
 
-	hex = (char *) malloc(sizeof(char) * len);
+	hex = (char *) ft_calloc(len, sizeof(char));
 	if (!hex)
 		return (NULL);
-	hex[len] = '\0';
 	if (n == 0)
 		hex[0] = '0';
 	return (hex);
@@ -54,10 +53,7 @@ static void	get_buffer(uint32_t n, char *buffer, int *count)
 	const char	hex_digits[17] = "0123456789abcdef";
 
 	if (n == 0)
-	{
 		*count = 1;
-		return ;
-	}
 	while (n != 0)
 	{
 		buffer[(*count)++] = hex_digits[n & 0xF];
