@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/02 12:59:49 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/08/02 13:55:17 by ajacome-         ###   ########.fr       */
+/*   Created: 2023/05/09 22:36:39 by andresj           #+#    #+#             */
+/*   Updated: 2023/07/13 18:12:42 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*get_next_line(int fd)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*content;
-	char	buffer[BUFFER_SIZE + 1];
-	ssize_t	nr;
-	ssize_t	size;
+	int		s1_len;
+	int		s2_len;
+	char	*concat;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (!s1 || !s2)
 		return (NULL);
-	buffer[BUFFER_SIZE + 1] = '\0';
-	nr = read(fd, buffer, BUFFER_SIZE);
-	while (*buffer)
-	{
-		
-	}
-	
-	if (nr < BUFFER_SIZE)
-		size = BUFFER_SIZE - nr;
-	else
-		size = BUFFER_SIZE;
-	content = (char *) malloc(sizeof(char) * (size + 1));
-	if (!content)
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	concat = (char *) malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!concat)
 		return (NULL);
-	
+	ft_strlcpy(concat, s1, s1_len + 1);
+	ft_strlcpy(concat + s1_len, s2, s2_len + 1);
+	return (concat);
 }
