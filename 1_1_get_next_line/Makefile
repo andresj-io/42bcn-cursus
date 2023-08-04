@@ -6,7 +6,7 @@
 #    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/08/04 12:39:05 by ajacome-         ###   ########.fr        #
+#    Updated: 2023/08/04 15:54:39 by ajacome-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ c_reset		= \033[0m
 
 # **************************** directories *********************************** #
 objects_dir = ./obj/
-include_dir = include/
 test_dir = ./tests/
 
 # **************************** variables ************************************* #
@@ -51,7 +50,7 @@ CC = gcc
 # Flags for compilation
 CFLAGS = -g -Wall -Wextra -Werror
 # -I is a preprocessor flag, not a compiler flag
-CPPFLAGS = -I $(include_dir)$(gnl_head) -MMD -MP
+CPPFLAGS = -I $(gnl_head) -MMD -MP
 BUFFER = -D BUFFER_SIZE=$(BUFFER_SIZE)
 
 # This creates a list of object files from the source files
@@ -63,7 +62,7 @@ dependacies = $(objects:.o=.d)
 all: no_buffer
 
 # Set dependancy for all object files from the libft.h header file
-$(objects): $(include_dir)$(gnl_head)
+$(objects): $(gnl_head)
 
 # Creates the obj directory to store object and dependancy files
 $(objects_dir):

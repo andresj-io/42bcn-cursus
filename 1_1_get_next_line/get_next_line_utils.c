@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:58:07 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/04 12:21:51 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/04 15:58:28 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/get_next_line.h"
+#include "get_next_line.h"
 
 void	free_strings(char *s1, char *s2, char *s3, char *s4)
 {
@@ -23,8 +23,6 @@ void	free_strings(char *s1, char *s2, char *s3, char *s4)
 	if (s4)
 		free(s4);
 }
-
-
 
 char	*dup_str(const char *s1)
 {

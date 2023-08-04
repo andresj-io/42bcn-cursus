@@ -6,11 +6,11 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:59:49 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/08/04 12:45:05 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/04 15:53:56 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/get_next_line.h"
+#include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {
