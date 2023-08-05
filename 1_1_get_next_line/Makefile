@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
+#    By: andresj <andresj@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/08/04 15:54:39 by ajacome-         ###   ########.fr        #
+#    Updated: 2023/08/05 09:08:13 by andresj          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ BUFFER_SIZE = 42
 gnl_head = get_next_line.h
 test_head = test.h
 
+header_files = .#$(gnl_head) $(test_head)
+
 # The name of the source files
 src = \
 test.c \
@@ -42,7 +44,6 @@ get_next_line_utils.c \
 
 test_src = \
 test.c \
-# test_pointers.c \
 
 # Frontend program when linking
 CC = gcc
@@ -50,7 +51,7 @@ CC = gcc
 # Flags for compilation
 CFLAGS = -g -Wall -Wextra -Werror
 # -I is a preprocessor flag, not a compiler flag
-CPPFLAGS = -I $(gnl_head) -MMD -MP
+CPPFLAGS = -I $(header_files) -MMD -MP
 BUFFER = -D BUFFER_SIZE=$(BUFFER_SIZE)
 
 # This creates a list of object files from the source files
@@ -69,21 +70,17 @@ $(objects_dir):
 	@echo "$(c_blue)Created directory: $(c_reset)/obj/"
 	@mkdir -p $(objects_dir)
 
-# Compile object files from soruce files 
+# Compile object files from soruce files
 $(objects_dir)%.o: %.c Makefile | $(objects_dir)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
-# # Create archive library
-# $(NAME): $(no_buffer)
-# 	$(no_buffer)
+no_buffer: $(objects_dir) $(objects) Makefile
+	@$(CC) $(CFLAGS) $(CPPFLAGS) *.c -o $(test_dir)$@
+	@echo "$(c_blue)Compiled using default $(c_reset)BUFFER_SIZE"
 
 buffer: $(objects_dir) $(objects) Makefile
-	@echo "$(c_blue)Compiled using $(c_reset)BUFFER_SIZE = $(c_yellow)$(BUFFER_SIZE) $(c_reset)"
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(BUFFER) *.c -o $(test_dir)$@
-
-no_buffer: $(objects_dir) $(objects) Makefile
-	@echo "$(c_blue)Compiled using default $(c_reset)BUFFER_SIZE"
-	@$(CC) $(CFLAGS) $(CPPFLAGS) *.c -o $(test_dir)$@
+	@echo "$(c_blue)Compiled using $(c_reset)BUFFER_SIZE = $(c_yellow)$(BUFFER_SIZE) $(c_reset)"
 
 .PHONY: all clean fclean re buffer
 
@@ -100,16 +97,22 @@ re: fclean all
 # Include the generated dependency files
 -include $(dependacies)
 
-# **************************** testing *************************************** #
-# test_objects = $(addprefix $(test_dir)$(objects_dir), $(src:%.c=%.o))
+test_objects = $(addprefix $(test_dir)$(objects_dir), $(test_src:%.c=%.o))
 
-# $(test_objects): $(test_dir)$(include_dir)$(head)
+$(test_objects): $(test_dir)$(include_dir)$(head)
+
+$(test_dir)$(objects_dir)%.o: %.c Makefile | $(test_dir)$(objects_dir)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
+# buffer: $(test_dir)$(objects_dir) $(objects_dir) $(objects) Makefile
+# 	@echo "$(c_blue)Compiled using $(c_reset)BUFFER_SIZE = $(c_yellow)$(BUFFER_SIZE) $(c_reset)"
+# 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(BUFFER) -o $(test_dir)$@ $< $(objects)
+
+$(test_dir)$(objects_dir):
+	@echo "$(c_blue)Created directory: $(c_reset)tests/obj/"
+	@mkdir -p $(test_dir)$(objects_dir)
 
 # test: $(test_dir)$(test_src) $(objects_dir) $(objects)
 # 	@$(CC) $(CFLAGS) -I $(test_dir)$(test_head) -o $(test_dir)$@ $< $(objects)
 # 	@echo "$(c_yellow)Starting test: $(c_reset)"
 # 	@./tests/test
-
-# $(test_dir)$(objects_dir):
-# 	@echo "$(c_blue)Created directory: $(c_reset)tests/obj/"
-# 	@mkdir -p $(test_dir)$(objects_dir)	

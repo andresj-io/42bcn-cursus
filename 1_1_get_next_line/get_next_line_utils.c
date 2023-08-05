@@ -3,87 +3,94 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:58:07 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/04 15:58:28 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/05 15:46:51 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	free_strings(char *s1, char *s2, char *s3, char *s4)
+t_status	save_old_content(t_read *data, int *len)
 {
-	if (s1)
-		free(s1);
-	if (s2)
-		free(s2);
-	if (s3)
-		free(s3);
-	if (s4)
-		free(s4);
+	char	*aux;
+
+	aux = gnl_str_dup(data->content);
+	if (!aux)
+	{
+		free(data->content);
+		return (err);
+	}
+	*len = gnl_strlen(data->content);
+	data->content = (char *) malloc(sizeof(char) *(*len + data->nr + 1));
+	if (!data->content)
+	{
+		free(aux);
+		return (err);
+	}
+	gnl_str_append(data->content, aux, 0, *len);
+	free(aux);
+	return (ok);
 }
 
-char	*dup_str(const char *s1)
+int	gnl_strlen(const char *str)
 {
-	int		len1;
+	int	len;
+
+	len = 0;
+	while (*(str + len))
+		len++;
+	return (len);
+}
+
+char	*gnl_str_dup(char *src)
+{
 	char	*new;
+	int		len1;
 
 	len1 = 0;
-	while (*s1)
+	while (*(src + len1))
 		len1++;
 	new = (char *) malloc(sizeof(char) * (len1 + 1));
 	if (!new)
-		return (NULL);
+		return (new);
 	len1 = -1;
-	while (*(s1 + ++len1))
-		*(new + len1) = *(s1 + len1);
+	while (*(src + ++len1))
+		*(new + len1) = *(src + len1);
 	return (new);
 }
 
-void	str_copy(char *dst, const char *src)
+void	gnl_str_append(char *dst, const char *src, int from, int to)
 {
-	int	i;
+	int	d_len;
 
-	i = 0;
-	while (*(src + i))
+	d_len = 0;
+	if (dst)
 	{
-		*(dst + i) = *(src + i);
-		i++;
+		while (*(dst + d_len))
+			d_len++;
 	}
-	*(dst + ++i) = '\0';
-}
-
-void	str_append(t_string *dst, const char *src, int from, int to)
-{
 	while (from < to)
 	{
-		*(dst->str + dst->ix) = *(src + from);
+		*(dst + d_len) = *(src + from);
 		from++;
-		dst->ix++;
+		d_len++;
 	}
 }
 
-char	*concat_str(const char *s1, const char *s2)
+int	gnl_search_nl(char *str)
 {
-	int		len1;
-	int		len2;
-	char	*concat;
+	int	nl_ix;
 
-	len1 = 0;
-	len2 = 0;
-	while (*s1)
-		len1++;
-	while (*s2)
-		len2++;
-	concat = (char *) malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!concat)
-		return (NULL);
-	len1 = -1;
-	while (*(s1 + ++len1))
-		*(concat + len1) = *(s1 + len1);
-	len2 = -1;
-	while (*(s2 + ++len2))
-		*(concat + len1 + len2) = *(s1 + len2);
-	return (concat);
+	nl_ix = 0;
+	while (*(str + nl_ix))
+	{
+		if (*(str + nl_ix) == '\n')
+		{
+			return (nl_ix);
+		}
+		nl_ix++;
+	}
+	return (-1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:59:46 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/04 12:10:56 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/05 15:11:09 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,35 @@
 # include <stdbool.h>
 # include <fcntl.h>
 
+typedef enum e_status
+{
+	err,
+	ok,
+}	t_status;
+
 typedef struct s_string
 {
 	char	*str;
-	ssize_t	size;
 	int		ix;
+	ssize_t	size;
 }	t_string;
 
 typedef struct s_read
 {
-	t_string	cnt;
-	t_string	lo;
-	char		*buffer;
-	char		*aux;
-	int			nl_index;
+	char		*content;
+	int			nl_ix;
+	ssize_t		nr;
 }	t_read;
 
-char	*get_next_line(int fd);
-void	read_line(int fd, t_read *store);
-size_t	get_content_size(t_read *data);
-void	add_content(t_read *data);
-void	add_left_over(t_read *data);
-void	free_strings(char *s1, char *s2, char *s3, char *s4);
-char	*dup_str(const char *s1);
-void	str_copy(char *dst, const char *src);
-void	str_append(t_string *dst, const char *src, int from, int to);
-char	*concat_str(const char *s1, const char *s2);
+char		*get_next_line(int fd);
+t_status	set_new_content(t_read *data, char *buffer);
+t_status	save_old_content(t_read *data, int *len);
+char		*parse(t_read *data);
+t_status	read_until(int fd, t_read *data);
+char		*get_left_over(t_read *data, int len, int *r_len);
+void		gnl_str_append(char *dst, const char *src, int from, int to);
+int			gnl_search_nl(char *str);
+int			gnl_strlen(const char *str);
+char		*gnl_str_dup(char *src);
 
 #endif

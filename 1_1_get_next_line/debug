@@ -1,0 +1,1 @@
+[{"Breakpoint":{"BKPTOptions":{"AutoContinue":false,"ConditionText":"","EnabledState":true,"IgnoreCount":0,"OneShotState":false},"BKPTResolver":{"Options":{"NameMask":[56],"Offset":0,"SkipPrologue":true,"SymbolNames":["test_file1"]},"Type":"SymbolName"},"Hardware":false,"SearchFilter":{"Options":{},"Type":"Unconstrained"}}}]

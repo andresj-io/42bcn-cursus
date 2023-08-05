@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:59:49 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/08/04 15:53:56 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/05 16:20:28 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,113 +14,121 @@
 
 char	*get_next_line(int fd)
 {
-	static t_string	left_over;
-	t_read			data;
+	static char	*left_over = NULL;
+	t_read		data;
 
 	if (fd < 0 || ((size_t)BUFFER_SIZE <= 0))
 		return (NULL);
-	data.buffer = (char *) malloc(sizeof(char) *((size_t)BUFFER_SIZE + 1));
-	if (!data.buffer)
-		return (NULL);
-	data.cnt.ix = 0;
-	data.cnt.size = 0;
-	data.lo.ix = 0;
-	data.lo.str = 0;
-	if (left_over.ix)
-	{
-		data.lo.ix = left_over.ix;
-		data.lo.str = left_over.str;
-	}
-	read_line(fd, &data);
-	if (data.lo.str)
-	{
-		left_over.ix = data.lo.ix;
-		left_over.str = data.lo.str;
-	}
-	return (data.cnt.str);
-}
-
-void	read_line(int fd, t_read *data)
-{
-	ssize_t		nr;
-
-	nr = 1;
-	while (nr > 0)
-	{
-		nr = read(fd, data->buffer, (size_t)BUFFER_SIZE);
-		if (nr < 0)
-		{
-			free_strings(data->aux, data->buffer, data->cnt.str, data->lo.str);
-			return ;
-		}
-		data->buffer[(int)BUFFER_SIZE] = '\0';
-		add_content(data);
-		if (!data->buffer)
-			return ;
-		add_left_over(data);
-		if (!data->buffer)
-			return ;
-		if (data->nl_index != 0)
-			break ;
-	}
-}
-
-void	add_content(t_read *data)
-{
-	data->cnt.size = get_content_size(data);
-	if (data->cnt.ix > 0)
-		data->aux = dup_str(data->cnt.str);
-	data->cnt.str = (char *)malloc(sizeof(char) * data->cnt.size);
-	if (!data->cnt.str)
-	{
-		free_strings(data->aux, data->buffer, data->lo.str, NULL);
-		return ;
-	}
-	if (data->cnt.ix > 0)
-	{
-		str_copy(data->cnt.str, data->aux);
-		free_strings(data->aux, NULL, NULL, NULL);
-	}
-	str_append(&data->cnt, data->buffer, 0, data->nl_index);
-	data->cnt.str[data->cnt.ix] = '\0';
-}
-
-size_t	get_content_size(t_read *data)
-{
-	bool	eol;
-
-	eol = false;
-	data->nl_index = 0;
-	while (*(data->buffer + data->nl_index) != '\n' \
-		&& *(data->buffer + data->nl_index))
-	{
-		data->nl_index++;
-		eol = true;
-	}
-	if (*data->buffer == '\n')
-		return (data->cnt.size + data->nl_index + 2);
-	else if (eol == true)
-		data->nl_index++;
+	if (left_over)
+		data.nl_ix = gnl_search_nl(left_over);
 	else
-		data->nl_index = BUFFER_SIZE;
-	return (data->cnt.size + data->nl_index + 1);
+		data.nl_ix = -1;
+	data.nr = 1;
+	data.content = left_over;
+	while (data.nl_ix == -1 && data.nr > 0)
+	{
+		if (read_until(fd, &data) == err)
+			return (NULL);
+	}
+	left_over = parse(&data);
+	return (data.content);
 }
 
-void	add_left_over(t_read *data)
+t_status	read_until(int fd, t_read *data)
 {
-	if (data->lo.ix > 0)
-		data->aux = dup_str(data->lo.str);
-	data->lo.size = data->lo.size + BUFFER_SIZE - data->nl_index;
-	data->lo.str = (char *)malloc(sizeof(char) * data->lo.size);
-	if (!data->cnt.str)
+	char	*buffer;
+
+	buffer = (char *) malloc(sizeof(char) *((size_t)BUFFER_SIZE + 1));
+	if (!buffer)
 	{
-		free_strings(data->aux, data->buffer, data->cnt.str, NULL);
-		return ;
+		free(data->content);
+		return (err);
 	}
-	if (data->lo.ix > 0)
+	data->nr = read(fd, buffer, (size_t)BUFFER_SIZE);
+	if (data->nr == -1)
 	{
-		str_copy(data->lo.str, data->aux);
-		free_strings(data->aux, NULL, NULL, NULL);
+		free(buffer);
+		free(data->content);
+		return (err);
 	}
-	str_append(&data->lo, data->buffer, data->nl_index, BUFFER_SIZE);
+	if (set_new_content(data, buffer) == err)
+	{
+		free(buffer);
+		return (err);
+	}
+	free(buffer);
+	return (ok);
+}
+
+t_status	set_new_content(t_read *data, char *buffer)
+{
+	int		len;
+
+	if (data->content)
+	{
+		if (save_old_content(data, &len) == err)
+			return (err);
+	}
+	else
+	{
+		len = 1;
+		data->content = (char *) malloc(sizeof(char) *(data->nr + 1));
+		if (!data->content)
+			return (err);
+	}
+	gnl_str_append(data->content, buffer, 0, len + data->nr);
+	data->nl_ix = gnl_search_nl(data->content);
+	return (ok);
+}
+
+char	*parse(t_read *data)
+{
+	int		len;
+	int		r_len;
+	char	*lo;
+
+	lo = NULL;
+	len = gnl_strlen(data->content);
+	r_len = len;
+	if (data->nl_ix != -1)
+	{
+		lo = get_left_over(data, len, &r_len);
+		if (!lo)
+		{
+			free(data->content);
+			return (NULL);
+		}
+		*(data->content + data->nl_ix + 1) = '\0';
+	}
+	else if (data->nl_ix == -1 && data->nr == 0 && len == 0)
+	{
+		free(data->content);
+		data->content = NULL;
+	}
+	else
+		*(data->content + r_len) = '\0';
+	return (lo);
+}
+
+char	*get_left_over(t_read *data, int len, int *r_len)
+{
+	char	*lo;
+	int		lo_len;
+
+	lo = NULL;
+	lo_len = 0;
+	if (data->nl_ix)
+		lo_len = len - data->nl_ix;
+	else
+		lo_len = len - 1;
+	*r_len = len - lo_len;
+	lo = (char *) malloc(sizeof(char) * (lo_len));
+	if (!lo)
+		return (NULL);
+	gnl_str_append(lo, data->content, data->nl_ix + 1, len);
+	if (data->nl_ix)
+		data->content[data->nl_ix + 1] = '\0';
+	else
+		data->content[len + 1] = '\0';
+	return (lo);
 }
