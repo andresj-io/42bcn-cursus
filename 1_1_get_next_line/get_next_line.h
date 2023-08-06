@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:59:46 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/06 19:34:33 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/06 17:39:15 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-
-typedef enum e_status
-{
-	err,
-	ok,
-}	t_status;
 
 typedef struct s_read
 {

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
+#    By: andresj <andresj@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/08/06 14:57:07 by ajacome-         ###   ########.fr        #
+#    Updated: 2023/08/06 17:36:34 by andresj          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ $(objects_dir):
 
 # Compile object files from soruce files
 $(objects_dir)%.o: %.c Makefile | $(objects_dir)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 no_buffer: $(objects_dir) $(objects) Makefile
 	@$(CC) $(CFLAGS) $(CPPFLAGS) *.c -o $(test_dir)$@
