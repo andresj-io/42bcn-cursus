@@ -6,7 +6,7 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:59:49 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/08/05 16:20:28 by andresj          ###   ########.fr       */
+/*   Updated: 2023/08/06 04:19:31 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ char	*get_next_line(int fd)
 			return (NULL);
 	}
 	left_over = parse(&data);
+	if (!data.content)
+	{
+		if (left_over)
+			free(left_over);
+	}
 	return (data.content);
 }
 
@@ -48,7 +53,8 @@ t_status	read_until(int fd, t_read *data)
 	if (data->nr == -1)
 	{
 		free(buffer);
-		free(data->content);
+		if (data->content)
+			free(data->content);
 		return (err);
 	}
 	if (set_new_content(data, buffer) == err)
@@ -71,8 +77,14 @@ t_status	set_new_content(t_read *data, char *buffer)
 	}
 	else
 	{
+		if (/* condition */)
+		{
+			/* code */
+		}
+
 		len = 1;
-		data->content = (char *) malloc(sizeof(char) *(data->nr + 1));
+		data->content = (char *) malloc(sizeof(char) * (data->nr + 1));
+		*(data->content + data->nr + 1) = '\0';
 		if (!data->content)
 			return (err);
 	}
@@ -124,7 +136,11 @@ char	*get_left_over(t_read *data, int len, int *r_len)
 	*r_len = len - lo_len;
 	lo = (char *) malloc(sizeof(char) * (lo_len));
 	if (!lo)
+	{
+		if (data->content)
+			free(data->content);
 		return (NULL);
+	}
 	gnl_str_append(lo, data->content, data->nl_ix + 1, len);
 	if (data->nl_ix)
 		data->content[data->nl_ix + 1] = '\0';

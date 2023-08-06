@@ -6,7 +6,7 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:58:07 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/05 15:46:51 by andresj          ###   ########.fr       */
+/*   Updated: 2023/08/06 04:07:36 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_status	save_old_content(t_read *data, int *len)
 		return (err);
 	}
 	gnl_str_append(data->content, aux, 0, *len);
+	*(data->content + *len + data->nr + 1) = '\0';
 	free(aux);
 	return (ok);
 }
@@ -84,6 +85,8 @@ int	gnl_search_nl(char *str)
 	int	nl_ix;
 
 	nl_ix = 0;
+	if (!str || !*str)
+		return (-1);
 	while (*(str + nl_ix))
 	{
 		if (*(str + nl_ix) == '\n')

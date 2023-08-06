@@ -6,7 +6,7 @@
 /*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 13:00:58 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/08/05 19:39:27 by andresj          ###   ########.fr       */
+/*   Updated: 2023/08/05 20:05:58 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,10 @@ int	main(void)
 	printf("%sStarting tests%s\n", BLUE, RESET);
 	printf(" BUFFER_SIZE = %s%i%s", YELLOW, BUFFER_SIZE, RESET);
 	test_file("tests/test_basic");
-	printf("\n");
 	test_file("tests/test_empty");
-	printf("\n");
 	test_file("tests/test_nl");
-	printf("\n");
 	test_file("tests/test_20nl");
-	printf("\n");
+	test_file("tests/test_1char");
 	test_stdin();
 	test_stdout();
 	test_stderr();
@@ -36,7 +33,8 @@ void	test_file(const char *path)
 {
 	int		fd;
 
-	printf("\n%s%s%s\n", GREEN, path, RESET);
+	printf("\n");
+	printf("%s%s%s\n", GREEN, path, RESET);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 	{
@@ -46,6 +44,7 @@ void	test_file(const char *path)
 	}
 	iterate_file(fd);
 	close (fd);
+	printf("\n");
 }
 
 static void	iterate_file(int fd)
@@ -66,7 +65,10 @@ static void	iterate_file(int fd)
 			break ;
 		}
 		else
+		{
 			printf("\t%sline %03i: %s%s", YELLOW, line_q, RESET, line);
+			free(line);
+		}
 		line_q++;
 	}
 }
