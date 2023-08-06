@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: andresj <andresj@student.42.fr>            +#+  +:+       +#+         #
+#    By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 10:33:54 by andresj           #+#    #+#              #
-#    Updated: 2023/08/05 09:08:13 by andresj          ###   ########.fr        #
+#    Updated: 2023/08/06 11:41:39 by ajacome-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ test_dir = ./tests/
 # **************************** variables ************************************* #
 # The name of the archived library
 NAME = test
-BUFFER_SIZE = 42
+BUFFER_SIZE = 100000
 
 # Header files
 gnl_head = get_next_line.h

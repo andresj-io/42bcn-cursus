@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:59:46 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/05 15:11:09 by andresj          ###   ########.fr       */
+/*   Updated: 2023/08/06 14:02:17 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 16
+#  define BUFFER_SIZE 42
 # endif
 
 # include <unistd.h>
@@ -28,29 +28,22 @@ typedef enum e_status
 	ok,
 }	t_status;
 
-typedef struct s_string
-{
-	char	*str;
-	int		ix;
-	ssize_t	size;
-}	t_string;
-
 typedef struct s_read
 {
-	char		*content;
-	int			nl_ix;
-	ssize_t		nr;
+	char	*content;
+	int		nl_ix;
+	ssize_t	nr;
 }	t_read;
 
-char		*get_next_line(int fd);
-t_status	set_new_content(t_read *data, char *buffer);
-t_status	save_old_content(t_read *data, int *len);
-char		*parse(t_read *data);
-t_status	read_until(int fd, t_read *data);
-char		*get_left_over(t_read *data, int len, int *r_len);
-void		gnl_str_append(char *dst, const char *src, int from, int to);
-int			gnl_search_nl(char *str);
-int			gnl_strlen(const char *str);
-char		*gnl_str_dup(char *src);
+char	*get_next_line(int fd);
+void	read_until(int fd, t_read *data);
+void	add_content(t_read *data, char *buffer);
+char	*parse(t_read *data);
+char	*get_left_over(t_read *data, int len);
+void	gnl_free(char **p);
+char	*gnl_str_dup(char *src, int len);
+void	gnl_str_append(char *dst, const char *src, int from, int to);
+int		gnl_search_nl(char *str);
+int		gnl_strlen(const char *str);
 
 #endif

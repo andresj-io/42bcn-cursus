@@ -3,36 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:58:07 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/06 04:07:36 by andresj          ###   ########.fr       */
+/*   Updated: 2023/08/06 14:03:49 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_status	save_old_content(t_read *data, int *len)
+void	gnl_free(char **p)
 {
-	char	*aux;
-
-	aux = gnl_str_dup(data->content);
-	if (!aux)
+	if (*p)
 	{
-		free(data->content);
-		return (err);
+		free(*p);
+		*p = NULL;
 	}
-	*len = gnl_strlen(data->content);
-	data->content = (char *) malloc(sizeof(char) *(*len + data->nr + 1));
-	if (!data->content)
-	{
-		free(aux);
-		return (err);
-	}
-	gnl_str_append(data->content, aux, 0, *len);
-	*(data->content + *len + data->nr + 1) = '\0';
-	free(aux);
-	return (ok);
 }
 
 int	gnl_strlen(const char *str)
@@ -40,25 +26,29 @@ int	gnl_strlen(const char *str)
 	int	len;
 
 	len = 0;
+	if (!str)
+		return (len);
 	while (*(str + len))
 		len++;
 	return (len);
 }
 
-char	*gnl_str_dup(char *src)
+char	*gnl_str_dup(char *src, int len)
 {
 	char	*new;
-	int		len1;
 
-	len1 = 0;
-	while (*(src + len1))
-		len1++;
-	new = (char *) malloc(sizeof(char) * (len1 + 1));
+	new = (char *) malloc(sizeof(char) * (len + 1));
 	if (!new)
+		return (NULL);
+	if (!*src && len > 0)
+	{
+		new[0] = '\0';
 		return (new);
-	len1 = -1;
-	while (*(src + ++len1))
-		*(new + len1) = *(src + len1);
+	}
+	len = -1;
+	while (*(src + ++len))
+		*(new + len) = *(src + len);
+	*(new + len) = '\0';
 	return (new);
 }
 
