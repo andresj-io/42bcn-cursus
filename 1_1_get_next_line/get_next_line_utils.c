@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:58:07 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/06 14:03:49 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/06 18:50:58 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	gnl_strlen(const char *str)
 	int	len;
 
 	len = 0;
-	if (!str)
+	if (!str || !*str)
 		return (len);
 	while (*(str + len))
 		len++;
@@ -36,15 +36,19 @@ int	gnl_strlen(const char *str)
 char	*gnl_str_dup(char *src, int len)
 {
 	char	*new;
+	int		len2;
 
 	new = (char *) malloc(sizeof(char) * (len + 1));
 	if (!new)
 		return (NULL);
-	if (!*src && len > 0)
+	len2 = 0;
+	while (len2 <= len)
 	{
-		new[0] = '\0';
-		return (new);
+		*(new + len2) = '\0';
+		len2++;
 	}
+	if (!*src && len > 0)
+		return (new);
 	len = -1;
 	while (*(src + ++len))
 		*(new + len) = *(src + len);
@@ -69,6 +73,7 @@ void	gnl_str_append(char *dst, const char *src, int from, int to)
 		d_len++;
 	}
 }
+	// *(dst + to) = '\0';
 
 int	gnl_search_nl(char *str)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:33:01 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/08/06 20:32:22 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/05 19:13:53 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@
 # define PURPLE "\033[0;35m"
 # define RESET "\033[0m"
 # include <stdio.h>
-# include <stdbool.h>
 
 void	test_stdin(void);
-char	**get_file_paths(void);
 void	test_file(const char *path);
 void	test_stdout(void);
 void	test_stderr(void);

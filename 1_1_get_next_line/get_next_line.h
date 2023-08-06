@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:59:46 by andresj           #+#    #+#             */
-/*   Updated: 2023/08/06 14:02:17 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/06 19:34:33 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdbool.h>
 # include <fcntl.h>
 
 typedef enum e_status
@@ -36,7 +35,7 @@ typedef struct s_read
 }	t_read;
 
 char	*get_next_line(int fd);
-void	read_until(int fd, t_read *data);
+void	read_until(int fd, t_read *data, char **lo);
 void	add_content(t_read *data, char *buffer);
 char	*parse(t_read *data);
 char	*get_left_over(t_read *data, int len);

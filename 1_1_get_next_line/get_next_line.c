@@ -6,7 +6,7 @@
 /*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:59:49 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/08/06 14:31:47 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/06 21:24:12 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*left_over = NULL;
+	static char	*left_over;
 	t_read		data;
 
 	if (fd < 0 || ((size_t)BUFFER_SIZE <= 0))
@@ -31,33 +31,33 @@ char	*get_next_line(int fd)
 			return (NULL);
 		data.nl_ix = gnl_search_nl(data.content);
 	}
-	read_until(fd, &data);
+	read_until(fd, &data, &left_over);
 	if (data.content)
 		left_over = parse(&data);
 	return (data.content);
 }
 
-void	read_until(int fd, t_read *data)
+void	read_until(int fd, t_read *data, char **lo)
 {
-	char	*buffer;
+	char	buffer[BUFFER_SIZE + 1];
 
 	while (data->nl_ix == -1 && data->nr > 0)
 	{
-		buffer = gnl_str_dup("", ((size_t)BUFFER_SIZE + 1));
-		if (!buffer)
-		{
-			data->nr = -1;
-			gnl_free(&data->content);
-			return ;
-		}
 		data->nr = read(fd, buffer, (size_t)BUFFER_SIZE);
 		if (data->nr > 0)
+		{
+			*(buffer + data->nr) = '\0';
 			add_content(data, buffer);
-		gnl_free(&buffer);
-		if (data->content)
-			data->nl_ix = gnl_search_nl(data->content);
-		else
-			break ;
+			if (data->content)
+				data->nl_ix = gnl_search_nl(data->content);
+			else
+				break ;
+		}
+	}
+	if (data->nr < 0)
+	{
+		gnl_free(lo);
+		gnl_free(&(data->content));
 	}
 }
 
@@ -73,14 +73,14 @@ void	add_content(t_read *data, char *buffer)
 		gnl_free(&data->content);
 		if (!aux)
 			return ;
-		data->content = gnl_str_dup(aux, len + data->nr + 1);
+		data->content = gnl_str_dup(aux, len + data->nr);
 		gnl_free(&aux);
 		if (!data->content)
 			return ;
 		gnl_str_append(data->content, buffer, 0, data->nr + 1);
 	}
 	else
-		data->content = gnl_str_dup(buffer, data->nr + 1);
+		data->content = gnl_str_dup(buffer, data->nr);
 }
 
 char	*parse(t_read *data)
@@ -102,7 +102,7 @@ char	*parse(t_read *data)
 	if (data->nl_ix >= 0)
 		data->content[data->nl_ix + 1] = '\0';
 	else
-		data->content[len + 1] = '\0';
+		data->content[len] = '\0';
 	return (lo);
 }
 
@@ -121,5 +121,6 @@ char	*get_left_over(t_read *data, int len)
 	if (!lo)
 		return (NULL);
 	gnl_str_append(lo, data->content, data->nl_ix + 1, len);
+	lo[lo_len] = '\0';
 	return (lo);
 }
