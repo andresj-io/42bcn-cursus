@@ -3,124 +3,120 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:59:49 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/08/06 21:24:12 by ajacome-         ###   ########.fr       */
+/*   Updated: 2023/08/06 21:12:00 by andresj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+static void	read_until(int fd, t_string *store, int *nl_ix);
+static void	add_2_store(t_string *store, t_string *new);
+static char	*parse(t_string *store, int nl_ix);
+static void	set_left_over(t_string *store, int nl_ix);
+
 char	*get_next_line(int fd)
 {
-	static char	*left_over;
-	t_read		data;
+	static t_string	store;
+	int				nl_ix;
+	char			*next;
 
 	if (fd < 0 || ((size_t)BUFFER_SIZE <= 0))
 		return (NULL);
-	data.nr = 1;
-	data.content = NULL;
-	data.nl_ix = -1;
-	if (left_over)
-	{
-		data.content = gnl_str_dup(left_over, gnl_strlen(left_over));
-		free(left_over);
-		left_over = NULL;
-		if (!data.content)
-			return (NULL);
-		data.nl_ix = gnl_search_nl(data.content);
-	}
-	read_until(fd, &data, &left_over);
-	if (data.content)
-		left_over = parse(&data);
-	return (data.content);
+	nl_ix = -1;
+	if (store.ix)
+		nl_ix = gnl_search_nl(store.s);
+	read_until(fd, &store, &nl_ix);
+	next = NULL;
+	if (store.ix)
+		next = parse(&store, nl_ix);
+	if (!next)
+		gnl_free(&store);
+	return (next);
 }
 
-void	read_until(int fd, t_read *data, char **lo)
+static void	read_until(int fd, t_string *store, int *nl_ix)
 {
-	char	buffer[BUFFER_SIZE + 1];
+	t_string	b_read;
+	char		buffer[BUFFER_SIZE + 1];
 
-	while (data->nl_ix == -1 && data->nr > 0)
+	b_read.s = buffer;
+	b_read.ix = 1;
+	while (*nl_ix == -1 && b_read.ix > 0)
 	{
-		data->nr = read(fd, buffer, (size_t)BUFFER_SIZE);
-		if (data->nr > 0)
+		b_read.ix = read(fd, b_read.s, (size_t)BUFFER_SIZE);
+		if (b_read.ix > 0)
 		{
-			*(buffer + data->nr) = '\0';
-			add_content(data, buffer);
-			if (data->content)
-				data->nl_ix = gnl_search_nl(data->content);
-			else
+			*(b_read.s + b_read.ix) = '\0';
+			*nl_ix = gnl_search_nl(b_read.s) + store->ix;
+			add_2_store(store, &b_read);
+			if (!store->s)
 				break ;
 		}
 	}
-	if (data->nr < 0)
-	{
-		gnl_free(lo);
-		gnl_free(&(data->content));
-	}
+	if (b_read.ix == -1)
+		gnl_free(store);
 }
 
-void	add_content(t_read *data, char *buffer)
+static void	add_2_store(t_string *store, t_string *new)
 {
-	int		len;
-	char	*aux;
+	t_string	aux;
 
-	len = gnl_strlen(data->content);
-	if (len)
+	aux.ix = 0;
+	aux.s = malloc(sizeof(char) * (store->ix + new->ix + 1));
+	if (!aux.s)
 	{
-		aux = gnl_str_dup(data->content, len);
-		gnl_free(&data->content);
-		if (!aux)
-			return ;
-		data->content = gnl_str_dup(aux, len + data->nr);
-		gnl_free(&aux);
-		if (!data->content)
-			return ;
-		gnl_str_append(data->content, buffer, 0, data->nr + 1);
+		gnl_free(store);
+		return ;
 	}
-	else
-		data->content = gnl_str_dup(buffer, data->nr);
+	if (store->ix)
+		gnl_str_append(&aux, store, 0, store->ix);
+	gnl_free(store);
+	*store = aux;
+	gnl_str_append(store, new, 0, new->ix);
 }
 
-char	*parse(t_read *data)
+static char	*parse(t_string *store, int nl_ix)
 {
-	char	*lo;
-	int		len;
+	t_string	next;
 
-	lo = NULL;
-	len = gnl_strlen(data->content);
-	if ((data->nl_ix != -1) && (*(data->content + data->nl_ix + 1)))
+	next.s = NULL;
+	next.ix = 0;
+	if (nl_ix > 0 && *(store->s + store->ix + 1))
 	{
-		lo = get_left_over(data, len);
-		if (!lo)
-		{
-			gnl_free(&data->content);
+		next.s = malloc(sizeof(char) * (nl_ix + 1));
+		if (!next.s)
 			return (NULL);
-		}
+		gnl_str_append(&next, store, 0, nl_ix - 1);
+		set_left_over(store, nl_ix);
+		if (!store->s)
+			gnl_free(&next);
 	}
-	if (data->nl_ix >= 0)
-		data->content[data->nl_ix + 1] = '\0';
 	else
-		data->content[len] = '\0';
-	return (lo);
+	{
+		next.s = malloc(sizeof(char) * (store->ix + 1));
+		if (!next.s)
+			return (NULL);
+		gnl_str_append(&next, store, 0, store->ix);
+		gnl_free(store);
+	}
+	return (next.s);
 }
 
-char	*get_left_over(t_read *data, int len)
+static void	set_left_over(t_string *store, int nl_ix)
 {
-	char	*lo;
-	int		lo_len;
+	t_string	aux;
 
-	lo = NULL;
-	lo_len = 0;
-	if (data->nl_ix)
-		lo_len = len - data->nl_ix;
-	else
-		lo_len = len - 1;
-	lo = gnl_str_dup("", lo_len);
-	if (!lo)
-		return (NULL);
-	gnl_str_append(lo, data->content, data->nl_ix + 1, len);
-	lo[lo_len] = '\0';
-	return (lo);
+	aux.ix = 0;
+	aux.s = malloc(sizeof(char) * (store->ix - nl_ix + 1));
+	if (!aux.s)
+	{
+		gnl_free(store);
+		return ;
+	}
+	gnl_str_append(&aux, store, nl_ix + 1, store->ix);
+	*store = aux;
+	gnl_free(&aux);
 }
