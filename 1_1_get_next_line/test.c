@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 13:00:58 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/08/06 17:33:02 by andresj          ###   ########.fr       */
+/*   Updated: 2023/08/09 10:45:34 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "test.h"
-
-static void	iterate_file(int fd);
 
 int	main(void)
 {
@@ -31,7 +29,7 @@ int	main(void)
 	};
 
 	i = init();
-	while (files[i])
+	while (files[i] && i < 15)
 	{
 		printf("\n%sTest: %02i%s\n", BLUE, i, RESET);
 		test_file(files[i]);
@@ -49,56 +47,38 @@ int	main(void)
 // test_stdout();
 // test_stderr();
 
-int	init(void)
+void	iterate_file(int fd)
 {
-	int			i;
-
-	i = 0;
-	printf("%sStarting tests%s\n", BLUE, RESET);
-	printf(" BUFFER_SIZE = %s%i%s", YELLOW, BUFFER_SIZE, RESET);
-	return (i);
-}
-
-void	test_file(const char *path)
-{
-	int		fd;
-
-	printf(" %s%s%s\n", GREEN, path, RESET);
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-	{
-		write(1, path, 15);
-		write(1, "File not found\n", 15);
-		return ;
-	}
-	iterate_file(fd);
-	close (fd);
-	printf("\n");
-}
-
-static void	iterate_file(int fd)
-{
-	int		line_q;
+	int		lq;
 	int		flag;
 	char	*line;
 
-	line_q = 0;
+	lq = 0;
 	flag = true;
 	line = NULL;
 	while (flag || line)
 	{
 		flag = false;
 		line = get_next_line(fd);
+		print_result(line, lq);
 		if (!line)
-		{
-			printf("\n\t%sline %03i: %s%s\n", YELLOW, line_q, RESET, "No line!");
 			break ;
-		}
-		else
-		{
-			printf("\t%sline %03i: %s%s", YELLOW, line_q, RESET, line);
-			free(line);
-		}
-		line_q++;
+		lq++;
+	}
+}
+
+void	print_result(char *line, int lq)
+{
+	int		len;
+
+	len = 0;
+	if (!line)
+		printf("\t%s[%03i, 0]: %s%s\n", YELLOW, lq, RESET, "No line!");
+	else
+	{
+		len = strlen(line);
+		printf("\n\t%s[%03i, %i]: %s%s",
+			YELLOW, lq, len, RESET, line);
+		free(line);
 	}
 }

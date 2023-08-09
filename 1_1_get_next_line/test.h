@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andresj <andresj@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajacome- <ajacome-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 11:33:01 by ajacome-          #+#    #+#             */
-/*   Updated: 2023/08/06 17:24:44 by andresj          ###   ########.fr       */
+/*   Updated: 2023/08/09 10:45:47 by ajacome-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@
 # define RESET "\033[0m"
 # include <stdio.h>
 # include <stdbool.h>
+# include <string.h>
 
 void	test_stdin(void);
 int		init(void);
 void	test_file(const char *path);
+void	iterate_file(int fd);
+void	print_result(char *line, int lq);
 void	test_stdout(void);
 void	test_stderr(void);
 
